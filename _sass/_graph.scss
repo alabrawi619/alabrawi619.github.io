@@ -78,6 +78,12 @@
   font-family: $font-mono;
   padding: $s-4;
   text-align: center;
+
+  // The class `display: flex` overrides the browser default for [hidden],
+  // so honour the attribute explicitly — otherwise this empty-state overlay
+  // sits on top of the graph (inset: 0) and swallows every pointer event,
+  // making the graph impossible to interact with.
+  &[hidden] { display: none; }
 }
 
 .graph-tooltip {
