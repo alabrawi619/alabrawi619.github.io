@@ -23,17 +23,7 @@ permalink: /:year/:month/:day/:title/
 
 # Plugins
 plugins:
-  - jekyll-paginate
   - jekyll-seo-tag
-  - jekyll-feed
-
-# Pagination
-paginate: 5
-paginate_path: "/page/:num/"
-
-# Feed
-feed:
-  path: feed.xml
 
 # SEO
 twitter:
