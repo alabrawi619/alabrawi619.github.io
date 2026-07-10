@@ -1,13 +1,12 @@
 ---
 ---
-
 // ============================================================
-// CYBER DARK TERMINAL — Main SCSS Entry Point
+// Cyber Dark — main entry
 // ============================================================
-
 @use "variables";
 @use "base";
-@use "terminal";
-@use "post";
+@use "layout";
+@use "content";
+@use "graph";
 @use "syntax";
 @use "responsive";

@@ -1,47 +1,53 @@
 // ============================================================
-// CYBER DARK TERMINAL — SCSS Variables
+// Cyber Dark — design tokens
 // ============================================================
 
-// --- Core Palette ---
-$black:        #000000;
-$bg-deep:      #030c03;
-$bg-panel:     #061206;
-$bg-highlight: #0a200a;
+// --- Surfaces (deep blacks & dark grays) ---
+$bg-deep:      #0a0a0f;
+$bg-panel:     #101018;
+$bg-elevated:  #16161f;
+$bg-hover:     #1c1c27;
 
-// --- Monochrome Green Primary ---
-$green-bright:  #00ff41;
-$green-mid:     #00cc33;
-$green-dim:     #008f11;
-$green-ghost:   #003b0a;
+// --- Text ---
+$text:         #e6edf3;
+$text-muted:   #9aa4b2;
+$text-faint:   #6b7280;
 
-// --- Complementary Accent Colors ---
-$amber:         #ffb000;
-$red-alert:     #ff2222;
-$cyan-accent:   #00ffcc;
-$magenta-dim:   #ff00aa;
-$white-dim:     #c8ffc8;
+// --- Neon accents ---
+$neon-cyan:    #00e5ff;
+$neon-magenta: #ff2bd6;
+$neon-purple:  #a970ff;
+$neon-green:   #39ff9e;
 
-// --- Borders ---
-$border-color:  $green-ghost;
-$border-bright: $green-dim;
+// --- Borders / lines ---
+$line:         rgba(255, 255, 255, 0.08);
+$line-strong:  rgba(255, 255, 255, 0.16);
 
 // --- Typography ---
-$font-mono:      'Courier New', Courier, 'Lucida Console', monospace;
-$font-size-base: 15px;
-$line-height:    1.7;
+$font-sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+$fs-base:  16px;
+$lh:       1.7;
 
 // --- Spacing ---
-$space-xs:  4px;
-$space-sm:  8px;
-$space-md:  16px;
-$space-lg:  32px;
-$space-xl:  64px;
+$s-1: 4px;
+$s-2: 8px;
+$s-3: 16px;
+$s-4: 24px;
+$s-5: 40px;
+$s-6: 64px;
+$s-7: 96px;
+
+// --- Layout ---
+$wrap-max: 1180px;
+$radius:   14px;
 
 // --- Breakpoints ---
-$bp-mobile:  480px;
-$bp-tablet:  768px;
-$bp-desktop: 1100px;
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
 
-// --- Timing ---
-$transition-fast: 0.1s;
-$transition-mid:  0.3s;
+// --- Motion ---
+$t-fast: 0.15s ease;
+$t-mid:  0.3s ease;

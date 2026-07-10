@@ -1,107 +1,58 @@
 ---
 layout: default
-title: "CYBER::TERMINAL"
+title: null
 ---
 
-<!-- ═══ STATUS BAR ═══════════════════════════════════════ -->
-<div class="status-bar">
-  <span class="status-left">[ CYBER::TERMINAL — MAINFRAME CONSOLE v3.1 ]</span>
-  <span class="status-right">SYS: ONLINE &nbsp;|&nbsp; MEM: 640K &nbsp;|&nbsp; {{ site.time | date: "%Y-%m-%d %H:%M" }} UTC</span>
-</div>
+<!-- ===== SECTION 1: ABOUT ME ===== -->
+<section class="hero" id="about">
+  <div class="hero-inner reveal">
+    <p class="hero-eyebrow">// welcome to the grid</p>
+    <h1 class="hero-name">{{ site.author.name }}</h1>
+    <p class="hero-bio">{{ site.author.bio | default: site.description }}</p>
 
-<!-- ═══ BOOT SEQUENCE WINDOW ════════════════════════════ -->
-<div class="term-box">
-  <div class="term-titlebar">
-    <span>TERMINAL.EXE — Boot Log</span>
-    <div class="term-controls">
-      <span>_</span><span>□</span><span>×</span>
-    </div>
-  </div>
-  <div class="term-body">
-    <pre class="ascii-art">
-  ██████╗██╗   ██╗██████╗ ███████╗██████╗
- ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
- ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
- ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
- ╚██████╗   ██║   ██████╔╝███████╗██║  ██║
-  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝
- ████████╗███████╗██████╗ ███╗   ███╗██╗███╗  ██╗ █████╗ ██╗
-    ██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗ ██║██╔══██╗██║
-    ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗██║███████║██║
-    ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚████║██╔══██║██║
-    ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚███║██║  ██║███████╗
-    ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚══╝╚═╝  ╚═╝╚══════╝</pre>
-
-    <div id="boot-sequence" aria-live="polite" aria-label="System boot log"></div>
-
-    <div style="margin-top:12px;">
-      <span class="prompt-line" id="live-prompt-text">WHOAMI</span><span class="cursor" aria-hidden="true"></span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ SYSOP PROFILE WINDOW ═════════════════════════════ -->
-<div class="term-box">
-  <div class="term-titlebar">
-    <span>ABOUT.SYS — System Information</span>
-    <div class="term-controls">
-      <span>_</span><span>□</span><span>×</span>
-    </div>
-  </div>
-  <div class="term-body">
-
-    <p class="prompt-line">cat about.sys</p>
-
-    <h2>SYSOP PROFILE</h2>
-    <p>
-      Welcome to <strong>{{ site.title }}</strong> — a personal terminal broadcasting
-      from the digital ether. This system is operated by
-      <strong>{{ site.author.name }}</strong>, a developer and tinkerer living at the
-      intersection of old iron and new ideas.
-    </p>
-
-    <h2>MISSION PARAMETERS</h2>
-    <pre><code>OBJECTIVE : Share technical notes, experiments, and ideas.
-FORMAT    : Plain text, code, and the occasional rant.
-SIGNAL    : 100% phosphor green. No cookies. No tracking.</code></pre>
-
-    <h2>TECH STACK</h2>
-    <table>
-      <thead>
-        <tr><th>COMPONENT</th><th>VERSION</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Platform</td><td>Jekyll 4.x</td></tr>
-        <tr><td>Highlighter</td><td>Rouge</td></tr>
-        <tr><td>Host</td><td>GitHub Pages</td></tr>
-        <tr><td>Theme</td><td>Cyber Dark Terminal</td></tr>
-      </tbody>
-    </table>
-
-    <h2>CONTACT</h2>
-    <ul>
+    <nav class="cyber-nav" aria-label="Primary">
+      <a class="cyber-btn" href="{{ '/blog/' | relative_url }}">
+        <span class="cyber-btn-label">Blog</span>
+        <span class="cyber-btn-sub">read the posts</span>
+      </a>
+      <a class="cyber-btn" href="{{ '/tags/' | relative_url }}">
+        <span class="cyber-btn-label">Tags</span>
+        <span class="cyber-btn-sub">browse topics</span>
+      </a>
+      <a class="cyber-btn" href="#graph">
+        <span class="cyber-btn-label">Graph</span>
+        <span class="cyber-btn-sub">explore the map</span>
+      </a>
       {% if site.author.github %}
-      <li><strong>GitHub:</strong>
-        <a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">github.com/{{ site.author.github }}</a>
-      </li>
+      <a class="cyber-btn" href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">
+        <span class="cyber-btn-label">GitHub</span>
+        <span class="cyber-btn-sub">see the code</span>
+      </a>
       {% endif %}
-      {% if site.author.email %}
-      <li><strong>Email:</strong> {{ site.author.email }}</li>
-      {% endif %}
-    </ul>
-
-    <hr>
-
-    <blockquote>
-      <p>"Any sufficiently advanced technology is indistinguishable from magic."<br>
-      — Arthur C. Clarke</p>
-    </blockquote>
-
+    </nav>
   </div>
-</div>
+  <a class="scroll-cue" href="#graph" aria-label="Scroll down">▾</a>
+</section>
 
-<!-- ═══ SYSTEM STATS STRIP ═══════════════════════════════ -->
-<div class="status-bar">
-  <span class="status-left">EOF — end of transmission</span>
-  <span class="status-right">F1:HELP F3:FIND F10:QUIT</span>
-</div>
+<!-- ===== SECTION 2: KNOWLEDGE GRAPH ===== -->
+<section class="graph-section" id="graph">
+  <div class="graph-head reveal">
+    <h2 class="section-title">Knowledge Graph</h2>
+    <p class="section-sub">Posts and the tags that connect them. Drag nodes, hover for details.</p>
+  </div>
+
+  <div class="graph-shell reveal">
+    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of posts and tags">
+      <p class="graph-empty" hidden>No posts yet — the graph will grow as you publish.</p>
+    </div>
+    <div class="graph-legend">
+      <span class="legend-item"><span class="legend-dot legend-post"></span>Post</span>
+      <span class="legend-item"><span class="legend-dot legend-tag"></span>Tag</span>
+    </div>
+    <div id="graph-tooltip" class="graph-tooltip" role="tooltip" hidden></div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
+<script src="{{ '/assets/js/reveal.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/graph.js' | relative_url }}" defer></script>

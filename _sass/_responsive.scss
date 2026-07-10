@@ -1,58 +1,23 @@
 // ============================================================
-// CYBER DARK TERMINAL — Responsive Overrides
+// Cyber Dark — responsive
 // ============================================================
 @use "variables" as *;
 
-// ---- Mobile ≤480px ----
-@media (max-width: $bp-mobile) {
-  html { font-size: 13px; }
+@media (max-width: $bp-md) {
+  .header-inner { height: 56px; }
+  .site-nav { gap: $s-3; font-size: 0.9rem; }
+  .site-nav a { font-size: 0.85rem; }
 
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $space-xs;
-  }
+  .hero { min-height: calc(100vh - 56px); padding: $s-5 $s-3; }
+  .cyber-nav { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 
-  .site-header nav.site-nav {
-    gap: $space-xs;
-    a { font-size: 0.78rem; }
-  }
-
-  .mainframe-menu {
-    font-size: 0.78rem;
-
-    .entry-id   { display: none; }
-    .entry-date { display: none; }
-  }
-
-  .post-header .post-title { font-size: 1.2rem; }
-
-  .term-box .term-titlebar { font-size: 0.7rem; }
-
-  .status-bar { font-size: 0.68rem; }
-
-  .pagination { gap: 4px; }
+  .post-nav { grid-template-columns: 1fr; }
+  .nav-next { text-align: left !important; }
 }
 
-// ---- Tablet 481–768px ----
-@media (min-width: #{$bp-mobile + 1}) and (max-width: $bp-tablet) {
-  html { font-size: 14px; }
-
-  .mainframe-menu .entry-id { display: none; }
-}
-
-// ---- Desktop ≥1100px ----
-@media (min-width: $bp-desktop) {
-  .site-wrapper { padding: 0 $space-lg; }
-  html { font-size: 15px; }
-}
-
-// ---- Print overrides ----
-@media print {
-  .site-wrapper::before,
-  .post-body::before,
-  .site-footer::after { display: none; }
-
-  body { background: white; color: black; }
-  a    { color: black; text-decoration: underline; }
+@media (max-width: $bp-sm) {
+  .wrap { padding-inline: $s-3; }
+  .site-nav a[href*="github.com"] { display: none; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: $s-1; }
+  .graph-legend { font-size: 0.7rem; }
 }

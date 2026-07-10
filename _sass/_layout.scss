@@ -1,0 +1,208 @@
+// ============================================================
+// Cyber Dark — layout: header, footer, hero, nav buttons
+// ============================================================
+@use "variables" as *;
+
+.wrap {
+  width: 100%;
+  max-width: $wrap-max;
+  margin-inline: auto;
+  padding-inline: $s-4;
+}
+
+// --- Header ---
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background: rgba($bg-deep, 0.72);
+  border-bottom: 1px solid $line;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $s-3;
+  height: 64px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: $s-2;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: $text;
+  &:hover { color: $text; }
+}
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $neon-cyan;
+  box-shadow: 0 0 12px $neon-cyan;
+}
+.site-nav {
+  display: flex;
+  gap: $s-4;
+  a {
+    color: $text-muted;
+    font-size: 0.95rem;
+    font-weight: 500;
+    &:hover, &.active { color: $text; }
+    &.active { text-shadow: 0 0 16px rgba($neon-cyan, 0.6); }
+  }
+}
+
+// --- Footer ---
+.site-footer {
+  margin-top: $s-7;
+  border-top: 1px solid $line;
+  color: $text-muted;
+  font-size: 0.9rem;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $s-3;
+  padding-block: $s-4;
+  flex-wrap: wrap;
+}
+
+// --- Hero / About (full screen) ---
+.hero {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $s-6 $s-4;
+  position: relative;
+}
+.hero-inner { max-width: 860px; width: 100%; }
+.hero-eyebrow {
+  font-family: $font-mono;
+  color: $neon-cyan;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: $s-3;
+}
+.hero-name {
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, $neon-cyan, $neon-purple 55%, $neon-magenta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-bio {
+  margin: $s-3 auto $s-5;
+  max-width: 620px;
+  color: $text-muted;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+}
+
+// --- Cyber nav buttons ---
+.cyber-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: $s-3;
+  width: 100%;
+}
+.cyber-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: $s-4;
+  text-align: left;
+  border: 1px solid $line-strong;
+  border-radius: $radius;
+  background:
+    linear-gradient(180deg, rgba($neon-cyan, 0.04), transparent),
+    $bg-panel;
+  color: $text;
+  position: relative;
+  overflow: hidden;
+  transition: transform $t-fast, border-color $t-fast, box-shadow $t-mid;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba($neon-cyan, 0.14), rgba($neon-magenta, 0.14));
+    opacity: 0;
+    transition: opacity $t-mid;
+  }
+  &:hover, &:focus-visible {
+    color: $text;
+    transform: translateY(-4px);
+    border-color: rgba($neon-cyan, 0.6);
+    box-shadow: 0 0 0 1px rgba($neon-cyan, 0.3), 0 12px 40px -12px rgba($neon-cyan, 0.5);
+    &::before { opacity: 1; }
+  }
+  &.solo { align-items: center; }
+}
+.cyber-btn-label {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.cyber-btn-sub {
+  position: relative;
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  color: $text-muted;
+  letter-spacing: 0.03em;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: $s-4;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $text-faint;
+  font-size: 1.4rem;
+  animation: bob 1.8s ease-in-out infinite;
+  &:hover { color: $neon-cyan; }
+}
+@keyframes bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+// --- Section headings ---
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-align: center;
+}
+.section-sub {
+  text-align: center;
+  color: $text-muted;
+  margin-top: $s-2;
+}
+
+// --- 404 ---
+.notfound {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $s-5;
+}
+.err-code {
+  font-family: $font-mono;
+  font-size: clamp(4rem, 18vw, 10rem);
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(120deg, $neon-magenta, $neon-purple);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.notfound h1 { margin: $s-3 0 $s-2; }
+.notfound p { color: $text-muted; margin-bottom: $s-4; }
