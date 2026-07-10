@@ -35,90 +35,73 @@ title: "CYBER::TERMINAL"
     <div id="boot-sequence" aria-live="polite" aria-label="System boot log"></div>
 
     <div style="margin-top:12px;">
-      <span class="prompt-line" id="live-prompt-text">LIST POSTS --all</span><span class="cursor" aria-hidden="true"></span>
+      <span class="prompt-line" id="live-prompt-text">WHOAMI</span><span class="cursor" aria-hidden="true"></span>
     </div>
   </div>
 </div>
 
-<!-- ═══ MAINFRAME POST MENU ══════════════════════════════ -->
+<!-- ═══ SYSOP PROFILE WINDOW ═════════════════════════════ -->
 <div class="term-box">
   <div class="term-titlebar">
-    <span>POSTS.DAT — Record Viewer [{{ site.posts.size }} entries found]</span>
+    <span>ABOUT.SYS — System Information</span>
     <div class="term-controls">
       <span>_</span><span>□</span><span>×</span>
     </div>
   </div>
   <div class="term-body">
 
-    <table class="mainframe-menu" role="grid" aria-label="Post listing">
+    <p class="prompt-line">cat about.sys</p>
+
+    <h2>SYSOP PROFILE</h2>
+    <p>
+      Welcome to <strong>{{ site.title }}</strong> — a personal terminal broadcasting
+      from the digital ether. This system is operated by
+      <strong>{{ site.author.name }}</strong>, a developer and tinkerer living at the
+      intersection of old iron and new ideas.
+    </p>
+
+    <h2>MISSION PARAMETERS</h2>
+    <pre><code>OBJECTIVE : Share technical notes, experiments, and ideas.
+FORMAT    : Plain text, code, and the occasional rant.
+SIGNAL    : 100% phosphor green. No cookies. No tracking.</code></pre>
+
+    <h2>TECH STACK</h2>
+    <table>
       <thead>
-        <tr>
-          <th class="entry-id">#ID</th>
-          <th>TITLE / DESCRIPTION</th>
-          <th class="entry-date">DATE</th>
-        </tr>
+        <tr><th>COMPONENT</th><th>VERSION</th></tr>
       </thead>
       <tbody>
-        {% for post in paginator.posts %}
-        <tr tabindex="0" aria-label="{{ post.title }}">
-          <td class="entry-id">{% assign global_idx = paginator.per_page | times: paginator.page | minus: paginator.per_page | plus: forloop.index %}{{ global_idx | prepend: '00' | slice: -3, 3 }}</td>
-          <td class="entry-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            <div class="entry-meta">
-              <span class="meta-sep">//</span>
-              {% if post.categories.size > 0 %}
-                {% for cat in post.categories %}
-                  <a href="{{ '/categories/' | relative_url }}#{{ cat | slugify }}" class="cat-label">{{ cat }}</a>
-                {% endfor %}
-              {% endif %}
-              {% if post.tags.size > 0 %}
-                {% for tag in post.tags %}
-                  <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag-label">{{ tag }}</a>
-                {% endfor %}
-              {% endif %}
-              {% if post.excerpt %}
-                <span style="color: var(--green-ghost, #003b0a); margin-left:4px;">{{ post.excerpt | strip_html | truncate: 80 }}</span>
-              {% endif %}
-            </div>
-          </td>
-          <td class="entry-date">{{ post.date | date: "%Y-%m-%d" }}</td>
-        </tr>
-        {% endfor %}
+        <tr><td>Platform</td><td>Jekyll 4.x</td></tr>
+        <tr><td>Highlighter</td><td>Rouge</td></tr>
+        <tr><td>Host</td><td>GitHub Pages</td></tr>
+        <tr><td>Theme</td><td>Cyber Dark Terminal</td></tr>
       </tbody>
     </table>
 
-    <!-- Pagination -->
-    {% if paginator.total_pages > 1 %}
-    <nav class="pagination" role="navigation" aria-label="Pagination">
-      {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | relative_url }}" aria-label="Previous page">&laquo; PREV</a>
-      {% else %}
-        <span class="disabled">&laquo; PREV</span>
+    <h2>CONTACT</h2>
+    <ul>
+      {% if site.author.github %}
+      <li><strong>GitHub:</strong>
+        <a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">github.com/{{ site.author.github }}</a>
+      </li>
       {% endif %}
-
-      {% for page_num in (1..paginator.total_pages) %}
-        {% if page_num == paginator.page %}
-          <span class="current">{{ page_num }}</span>
-        {% elsif page_num == 1 %}
-          <a href="{{ '/' | relative_url }}">{{ page_num }}</a>
-        {% else %}
-          <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}">{{ page_num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | relative_url }}" aria-label="Next page">NEXT &raquo;</a>
-      {% else %}
-        <span class="disabled">NEXT &raquo;</span>
+      {% if site.author.email %}
+      <li><strong>Email:</strong> {{ site.author.email }}</li>
       {% endif %}
-    </nav>
-    {% endif %}
+    </ul>
+
+    <hr>
+
+    <blockquote>
+      <p>"Any sufficiently advanced technology is indistinguishable from magic."<br>
+      — Arthur C. Clarke</p>
+    </blockquote>
 
   </div>
 </div>
 
 <!-- ═══ SYSTEM STATS STRIP ═══════════════════════════════ -->
 <div class="status-bar">
-  <span class="status-left">EOF — {{ paginator.posts.size }} records displayed</span>
-  <span class="status-right">PAGE {{ paginator.page }} / {{ paginator.total_pages }} &nbsp;|&nbsp; F1:HELP F3:FIND F10:QUIT</span>
+  <span class="status-left">EOF — end of transmission</span>
+  <span class="status-right">F1:HELP F3:FIND F10:QUIT</span>
 </div>
