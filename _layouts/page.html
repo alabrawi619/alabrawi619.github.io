@@ -1,13 +1,12 @@
 ---
 layout: default
 ---
-
-<div class="page-wrapper">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title | escape }}</h1>
+<div class="wrap page">
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    {% if page.subtitle %}<p class="page-subtitle">{{ page.subtitle }}</p>{% endif %}
   </header>
-
-  <div class="post-body">
+  <div class="prose">
     {{ content }}
   </div>
 </div>

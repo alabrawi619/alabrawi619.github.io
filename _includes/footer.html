@@ -1,14 +1,6 @@
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-sys">
-      <span>SYSTEM:</span> {{ site.title }}<br>
-      <span>KERNEL:</span> Jekyll {{ jekyll.version }}<br>
-      <span>UPTIME:</span> Since {{ site.time | date: "%Y" }}<br>
-      <span>STATUS:</span> ONLINE
-    </div>
-    <div class="footer-links">
-      <a href="{{ '/' | relative_url }}">HOME</a>
-      {% if site.author.github %}<a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">GITHUB</a>{% endif %}
-    </div>
+  <div class="wrap footer-inner">
+    <span>© {{ site.time | date: "%Y" }} {{ site.author.name }}</span>
+    <span class="footer-meta">Built with Jekyll · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></span>
   </div>
 </footer>

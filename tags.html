@@ -1,0 +1,32 @@
+---
+layout: default
+title: Tags
+permalink: /tags/
+---
+<div class="wrap page">
+  <header class="page-header reveal">
+    <h1 class="page-title">Tags</h1>
+    <p class="page-subtitle">Browse posts by topic.</p>
+  </header>
+
+  {% if site.tags.size > 0 %}
+  <div class="tag-cloud reveal">
+    {% for tag in site.tags %}
+    <a class="chip chip-tag" href="#{{ tag[0] | slugify }}">#{{ tag[0] }} <span class="chip-count">{{ tag[1].size }}</span></a>
+    {% endfor %}
+  </div>
+
+  {% for tag in site.tags %}
+  <section class="tag-group reveal" id="{{ tag[0] | slugify }}">
+    <h2 class="tag-heading">#{{ tag[0] }}</h2>
+    <ul class="post-list compact">
+      {% for post in tag[1] %}
+      <li><a href="{{ post.url | relative_url }}"><time>{{ post.date | date: "%Y-%m-%d" }}</time> {{ post.title | escape }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  {% else %}
+  <p class="empty">No tags yet.</p>
+  {% endif %}
+</div>

@@ -1,187 +1,87 @@
 // ============================================================
-// CYBER DARK TERMINAL — Base / Reset
+// Cyber Dark — base / reset
 // ============================================================
 @use "variables" as *;
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
 
 html {
-  font-size: $font-size-base;
+  font-size: $fs-base;
   scroll-behavior: smooth;
-  background-color: $bg-deep;
-  color: $green-mid;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: $font-mono;
+  font-family: $font-sans;
+  line-height: $lh;
+  color: $text;
   background-color: $bg-deep;
-  color: $green-mid;
-  line-height: $line-height;
+  // Subtle radial neon glow + grid — the "cyber" backdrop.
+  background-image:
+    radial-gradient(1200px 600px at 15% -10%, rgba($neon-purple, 0.12), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba($neon-cyan, 0.10), transparent 55%),
+    linear-gradient($line 1px, transparent 1px),
+    linear-gradient(90deg, $line 1px, transparent 1px);
+  background-size: auto, auto, 44px 44px, 44px 44px;
+  background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-// CRT phosphor glow on all text
-body * {
-  text-shadow: 0 0 6px rgba($green-dim, 0.45);
-}
+img { max-width: 100%; height: auto; display: block; }
 
-// Scrollbar
-::-webkit-scrollbar {
-  width: 8px;
-  background: $black;
-}
-::-webkit-scrollbar-thumb {
-  background: $green-ghost;
-  border-radius: 0;
-  &:hover { background: $green-dim; }
-}
-
-// Links
 a {
-  color: $green-bright;
+  color: $neon-cyan;
   text-decoration: none;
-  transition: color $transition-fast, text-shadow $transition-fast;
-
-  &:hover, &:focus {
-    color: $cyan-accent;
-    text-shadow: 0 0 10px rgba($cyan-accent, 0.8);
-    outline: none;
-  }
+  transition: color $t-fast;
+  &:hover, &:focus-visible { color: $neon-magenta; }
 }
 
-// Headings
 h1, h2, h3, h4, h5, h6 {
-  color: $green-bright;
-  font-weight: normal;
-  letter-spacing: 0.05em;
-  line-height: 1.3;
-  margin-bottom: $space-md;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text;
+  letter-spacing: -0.01em;
 }
 
-h1 { font-size: 1.8rem; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.2rem; }
-h4 { font-size: 1.1rem; }
+::selection { background: rgba($neon-cyan, 0.3); color: #fff; }
 
-// Paragraphs
-p {
-  color: $white-dim;
-  margin-bottom: $space-md;
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: $bg-deep; }
+::-webkit-scrollbar-thumb { background: $line-strong; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba($neon-cyan, 0.4); }
+
+// Accessibility helpers
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: $neon-cyan;
+  color: $bg-deep;
+  padding: $s-2 $s-3;
+  z-index: 1000;
+  border-radius: 0 0 $radius 0;
+  &:focus { left: 0; }
 }
 
-// Horizontal Rule
-hr {
-  border: none;
-  border-top: 1px solid $border-color;
-  margin: $space-lg 0;
+:focus-visible {
+  outline: 2px solid $neon-cyan;
+  outline-offset: 2px;
 }
 
-// Code & Pre
-code {
-  font-family: $font-mono;
-  background: $bg-panel;
-  color: $cyan-accent;
-  padding: 2px 6px;
-  border: 1px solid $green-ghost;
-  font-size: 0.9em;
+// Reveal-on-scroll (IntersectionObserver adds .is-visible)
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+  &.is-visible { opacity: 1; transform: none; }
 }
 
-pre {
-  background: $bg-panel;
-  border: 1px solid $border-bright;
-  padding: $space-md;
-  overflow-x: auto;
-  margin-bottom: $space-md;
-  position: relative;
-
-  code {
-    background: none;
-    border: none;
-    padding: 0;
-    color: $green-bright;
-    font-size: 0.88rem;
-  }
-}
-
-// Blockquote
-blockquote {
-  border-left: 3px solid $amber;
-  padding-left: $space-md;
-  color: $amber;
-  margin-left: 0;
-  margin-bottom: $space-md;
-
-  p { color: $amber; }
-}
-
-// Lists
-ul, ol {
-  margin-left: $space-lg;
-  margin-bottom: $space-md;
-  color: $white-dim;
-
-  li { margin-bottom: $space-xs; }
-}
-
-// Images
-img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid $border-color;
-  display: block;
-}
-
-// Tables
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: $space-md;
-  font-size: 0.9rem;
-
-  th {
-    color: $green-bright;
-    border-bottom: 1px solid $border-bright;
-    padding: $space-xs $space-sm;
-    text-align: left;
-  }
-
-  td {
-    color: $white-dim;
-    border-bottom: 1px solid $border-color;
-    padding: $space-xs $space-sm;
-  }
-
-  tr:hover td {
-    background: $bg-highlight;
-    color: $green-bright;
-  }
-}
-
-// Selection highlight
-::selection {
-  background: $green-dim;
-  color: $black;
-}
-
-// Input / textarea (for potential search/form use)
-input, textarea, select {
-  font-family: $font-mono;
-  background: $bg-panel;
-  color: $green-bright;
-  border: 1px solid $border-bright;
-  padding: $space-xs $space-sm;
-  font-size: 0.9rem;
-  outline: none;
-
-  &:focus {
-    border-color: $green-bright;
-    box-shadow: 0 0 8px rgba($green-bright, 0.4);
-  }
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }

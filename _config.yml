@@ -1,16 +1,19 @@
-title: "CYBER::TERMINAL"
-description: "A retro mainframe blog running on monochrome green."
+# ============================================================
+# Site settings — Cyber Dark
+# ============================================================
+title: "alabrawi619"
+description: "A cyber dark corner of the web — notes, experiments, and ideas."
 url: "https://alabrawi619.github.io"
 baseurl: ""
+lang: en
 
 author:
   name: "alabrawi619"
   email: ""
-  bio: "SYSOP | root@terminal:~#"
-  twitter: ""
+  bio: "Developer & tinkerer. Building things at the edge of dark mode."
   github: "alabrawi619"
 
-# Build
+# --- Build ---
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -21,23 +24,34 @@ kramdown:
 
 permalink: /:year/:month/:day/:title/
 
-# Plugins
+# --- Pagination (jekyll-paginate) ---
+paginate: 6
+paginate_path: "/blog/page:num/"
+
+# --- Plugins ---
 plugins:
+  - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-feed
 
-# SEO
-twitter:
-  username: ""
-
-# Sass
+# --- Sass ---
 sass:
   style: compressed
   sass_dir: _sass
 
-# Exclude from build
+# --- Collections defaults ---
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# --- Exclude from build ---
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
   - vendor/
   - .bundle/
+  - node_modules/

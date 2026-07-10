@@ -1,0 +1,150 @@
+// ============================================================
+// Cyber Dark — content: prose, posts, pages, lists, chips
+// ============================================================
+@use "variables" as *;
+
+// --- Generic page / post wrappers ---
+.page, .post { padding-block: $s-6; }
+
+.page-header, .post-header { margin-bottom: $s-5; }
+.page-title, .post-title {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+.page-subtitle, .post-meta { color: $text-muted; margin-top: $s-2; }
+.post-meta { font-family: $font-mono; font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: $s-2; align-items: center; }
+.post-meta .dot { color: $text-faint; }
+.post-tags { margin-top: $s-3; display: flex; flex-wrap: wrap; gap: $s-2; }
+
+// --- Chips (tags / categories) ---
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid $line-strong;
+  color: $text-muted;
+  background: $bg-panel;
+  transition: color $t-fast, border-color $t-fast;
+}
+.chip-tag:hover { color: $neon-cyan; border-color: rgba($neon-cyan, 0.5); }
+.chip-cat { color: $neon-purple; border-color: rgba($neon-purple, 0.4); }
+.chip-count { color: $text-faint; }
+
+// --- Prose (rendered markdown) ---
+.prose {
+  max-width: 760px;
+  color: $text;
+  font-size: 1.05rem;
+  h1, h2, h3, h4 { margin: $s-5 0 $s-3; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.3rem; }
+  p, ul, ol, blockquote, pre, table { margin-bottom: $s-4; }
+  ul, ol { padding-left: $s-4; }
+  li { margin-bottom: $s-1; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+  hr { border: none; border-top: 1px solid $line; margin: $s-5 0; }
+
+  blockquote {
+    border-left: 3px solid $neon-purple;
+    padding: $s-1 $s-4;
+    color: $text-muted;
+    background: rgba($neon-purple, 0.06);
+    border-radius: 0 $radius $radius 0;
+  }
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.88em;
+    background: $bg-elevated;
+    color: $neon-cyan;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid $line;
+  }
+
+  pre {
+    background: $bg-panel;
+    border: 1px solid $line;
+    border-radius: $radius;
+    padding: $s-4;
+    overflow-x: auto;
+    code { background: none; border: none; padding: 0; color: inherit; }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    th, td { padding: $s-2 $s-3; border-bottom: 1px solid $line; text-align: left; }
+    th { color: $text; }
+    td { color: $text-muted; }
+  }
+
+  img { border-radius: $radius; border: 1px solid $line; margin: $s-4 0; }
+}
+
+// --- Post navigation ---
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $s-3;
+  margin-top: $s-6;
+  padding-top: $s-4;
+  border-top: 1px solid $line;
+  a {
+    display: flex;
+    flex-direction: column;
+    color: $text;
+    span { font-family: $font-mono; font-size: 0.75rem; color: $text-faint; }
+    &:hover { color: $neon-cyan; }
+  }
+  .nav-next { text-align: right; }
+}
+
+// --- Blog post list / cards ---
+.post-list { list-style: none; display: grid; gap: $s-4; }
+.post-card {
+  border: 1px solid $line;
+  border-radius: $radius;
+  background: $bg-panel;
+  transition: transform $t-fast, border-color $t-fast, box-shadow $t-mid;
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba($neon-cyan, 0.4);
+    box-shadow: 0 12px 40px -18px rgba($neon-cyan, 0.6);
+  }
+}
+.post-card-link { display: block; padding: $s-4; color: $text; }
+.post-card time { font-family: $font-mono; font-size: 0.8rem; color: $text-faint; }
+.post-card h2 { font-size: 1.35rem; margin: $s-1 0 $s-2; }
+.post-card p { color: $text-muted; margin-bottom: $s-3; }
+.card-tags { display: flex; flex-wrap: wrap; gap: $s-2; }
+
+.post-list.compact { gap: $s-1; }
+.post-list.compact li a {
+  display: flex; gap: $s-3; padding: $s-2 0; color: $text; border-bottom: 1px solid $line;
+  time { color: $text-faint; font-family: $font-mono; font-size: 0.85rem; }
+  &:hover { color: $neon-cyan; }
+}
+
+// --- Tags page ---
+.tag-cloud { display: flex; flex-wrap: wrap; gap: $s-2; margin-bottom: $s-6; }
+.tag-group { margin-bottom: $s-5; scroll-margin-top: 80px; }
+.tag-heading { font-size: 1.4rem; margin-bottom: $s-3; color: $neon-cyan; }
+
+// --- Pagination ---
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $s-4;
+  margin-top: $s-6;
+  font-family: $font-mono;
+  .page-count { color: $text-muted; font-size: 0.9rem; }
+}
+
+.empty { color: $text-muted; }

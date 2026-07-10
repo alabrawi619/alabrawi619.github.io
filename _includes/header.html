@@ -1,8 +1,13 @@
 <header class="site-header">
-  <span class="header-prompt">root@terminal:~#</span>
-  <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
-  <nav class="site-nav" role="navigation" aria-label="Main navigation">
-    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>HOME</a>
-    {% if site.author.github %}<a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">GITHUB</a>{% endif %}
-  </nav>
+  <div class="wrap header-inner">
+    <a href="{{ '/' | relative_url }}" class="brand">
+      <span class="brand-dot" aria-hidden="true"></span>{{ site.title }}
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a>
+      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog' %} class="active"{% endif %}>Blog</a>
+      <a href="{{ '/tags/' | relative_url }}"{% if page.url contains '/tags' %} class="active"{% endif %}>Tags</a>
+      {% if site.author.github %}<a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank">GitHub</a>{% endif %}
+    </nav>
+  </div>
 </header>
