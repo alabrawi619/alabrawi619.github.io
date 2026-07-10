@@ -1,0 +1,53 @@
+title: "CYBER::TERMINAL"
+description: "A retro mainframe blog running on monochrome green."
+url: "https://alabrawi619.github.io"
+baseurl: ""
+
+author:
+  name: "alabrawi619"
+  email: ""
+  bio: "SYSOP | root@terminal:~#"
+  twitter: ""
+  github: "alabrawi619"
+
+# Build
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+
+permalink: /:year/:month/:day/:title/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Pagination
+paginate: 5
+paginate_path: "/page/:num/"
+
+# Feed
+feed:
+  path: feed.xml
+
+# SEO
+twitter:
+  username: ""
+
+# Sass
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .bundle/

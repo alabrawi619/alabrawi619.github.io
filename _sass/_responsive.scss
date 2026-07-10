@@ -1,0 +1,58 @@
+// ============================================================
+// CYBER DARK TERMINAL — Responsive Overrides
+// ============================================================
+@use "variables" as *;
+
+// ---- Mobile ≤480px ----
+@media (max-width: $bp-mobile) {
+  html { font-size: 13px; }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-xs;
+  }
+
+  .site-header nav.site-nav {
+    gap: $space-xs;
+    a { font-size: 0.78rem; }
+  }
+
+  .mainframe-menu {
+    font-size: 0.78rem;
+
+    .entry-id   { display: none; }
+    .entry-date { display: none; }
+  }
+
+  .post-header .post-title { font-size: 1.2rem; }
+
+  .term-box .term-titlebar { font-size: 0.7rem; }
+
+  .status-bar { font-size: 0.68rem; }
+
+  .pagination { gap: 4px; }
+}
+
+// ---- Tablet 481–768px ----
+@media (min-width: #{$bp-mobile + 1}) and (max-width: $bp-tablet) {
+  html { font-size: 14px; }
+
+  .mainframe-menu .entry-id { display: none; }
+}
+
+// ---- Desktop ≥1100px ----
+@media (min-width: $bp-desktop) {
+  .site-wrapper { padding: 0 $space-lg; }
+  html { font-size: 15px; }
+}
+
+// ---- Print overrides ----
+@media print {
+  .site-wrapper::before,
+  .post-body::before,
+  .site-footer::after { display: none; }
+
+  body { background: white; color: black; }
+  a    { color: black; text-decoration: underline; }
+}

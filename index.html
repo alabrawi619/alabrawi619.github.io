@@ -1,0 +1,124 @@
+---
+layout: default
+title: "CYBER::TERMINAL"
+---
+
+<!-- ═══ STATUS BAR ═══════════════════════════════════════ -->
+<div class="status-bar">
+  <span class="status-left">[ CYBER::TERMINAL — MAINFRAME CONSOLE v3.1 ]</span>
+  <span class="status-right">SYS: ONLINE &nbsp;|&nbsp; MEM: 640K &nbsp;|&nbsp; {{ site.time | date: "%Y-%m-%d %H:%M" }} UTC</span>
+</div>
+
+<!-- ═══ BOOT SEQUENCE WINDOW ════════════════════════════ -->
+<div class="term-box">
+  <div class="term-titlebar">
+    <span>TERMINAL.EXE — Boot Log</span>
+    <div class="term-controls">
+      <span>_</span><span>□</span><span>×</span>
+    </div>
+  </div>
+  <div class="term-body">
+    <pre class="ascii-art">
+  ██████╗██╗   ██╗██████╗ ███████╗██████╗
+ ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
+ ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
+ ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
+ ╚██████╗   ██║   ██████╔╝███████╗██║  ██║
+  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝
+ ████████╗███████╗██████╗ ███╗   ███╗██╗███╗  ██╗ █████╗ ██╗
+    ██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗ ██║██╔══██╗██║
+    ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗██║███████║██║
+    ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚████║██╔══██║██║
+    ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚███║██║  ██║███████╗
+    ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚══╝╚═╝  ╚═╝╚══════╝</pre>
+
+    <div id="boot-sequence" aria-live="polite" aria-label="System boot log"></div>
+
+    <div style="margin-top:12px;">
+      <span class="prompt-line" id="live-prompt-text">LIST POSTS --all</span><span class="cursor" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAINFRAME POST MENU ══════════════════════════════ -->
+<div class="term-box">
+  <div class="term-titlebar">
+    <span>POSTS.DAT — Record Viewer [{{ site.posts.size }} entries found]</span>
+    <div class="term-controls">
+      <span>_</span><span>□</span><span>×</span>
+    </div>
+  </div>
+  <div class="term-body">
+
+    <table class="mainframe-menu" role="grid" aria-label="Post listing">
+      <thead>
+        <tr>
+          <th class="entry-id">#ID</th>
+          <th>TITLE / DESCRIPTION</th>
+          <th class="entry-date">DATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in paginator.posts %}
+        <tr tabindex="0" aria-label="{{ post.title }}">
+          <td class="entry-id">{% assign global_idx = paginator.per_page | times: paginator.page | minus: paginator.per_page | plus: forloop.index %}{{ global_idx | prepend: '00' | slice: -3, 3 }}</td>
+          <td class="entry-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <div class="entry-meta">
+              <span class="meta-sep">//</span>
+              {% if post.categories.size > 0 %}
+                {% for cat in post.categories %}
+                  <a href="{{ '/categories/' | relative_url }}#{{ cat | slugify }}" class="cat-label">{{ cat }}</a>
+                {% endfor %}
+              {% endif %}
+              {% if post.tags.size > 0 %}
+                {% for tag in post.tags %}
+                  <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag-label">{{ tag }}</a>
+                {% endfor %}
+              {% endif %}
+              {% if post.excerpt %}
+                <span style="color: var(--green-ghost, #003b0a); margin-left:4px;">{{ post.excerpt | strip_html | truncate: 80 }}</span>
+              {% endif %}
+            </div>
+          </td>
+          <td class="entry-date">{{ post.date | date: "%Y-%m-%d" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    {% if paginator.total_pages > 1 %}
+    <nav class="pagination" role="navigation" aria-label="Pagination">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}" aria-label="Previous page">&laquo; PREV</a>
+      {% else %}
+        <span class="disabled">&laquo; PREV</span>
+      {% endif %}
+
+      {% for page_num in (1..paginator.total_pages) %}
+        {% if page_num == paginator.page %}
+          <span class="current">{{ page_num }}</span>
+        {% elsif page_num == 1 %}
+          <a href="{{ '/' | relative_url }}">{{ page_num }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}">{{ page_num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}" aria-label="Next page">NEXT &raquo;</a>
+      {% else %}
+        <span class="disabled">NEXT &raquo;</span>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- ═══ SYSTEM STATS STRIP ═══════════════════════════════ -->
+<div class="status-bar">
+  <span class="status-left">EOF — {{ paginator.posts.size }} records displayed</span>
+  <span class="status-right">PAGE {{ paginator.page }} / {{ paginator.total_pages }} &nbsp;|&nbsp; F1:HELP F3:FIND F10:QUIT</span>
+</div>
