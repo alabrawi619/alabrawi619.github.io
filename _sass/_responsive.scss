@@ -13,6 +13,13 @@
 
   .post-nav { grid-template-columns: 1fr; }
   .nav-next { text-align: left !important; }
+
+  .blog-doc-layout { grid-template-columns: 1fr; }
+  .blog-sidebar {
+    position: static;
+    max-height: none;
+    top: auto;
+  }
 }
 
 @media (max-width: $bp-sm) {
