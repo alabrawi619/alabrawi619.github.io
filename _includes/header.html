@@ -1,0 +1,11 @@
+<header class="site-header">
+  <span class="header-prompt">root@terminal:~#</span>
+  <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>HOME</a>
+    <a href="{{ '/about' | relative_url }}"{% if page.url contains '/about' %} class="active"{% endif %}>ABOUT</a>
+    <a href="{{ '/categories' | relative_url }}"{% if page.url contains '/categories' %} class="active"{% endif %}>CATEGORIES</a>
+    <a href="{{ '/tags' | relative_url }}"{% if page.url contains '/tags' %} class="active"{% endif %}>TAGS</a>
+    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+  </nav>
+</header>

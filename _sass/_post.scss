@@ -1,0 +1,213 @@
+// ============================================================
+// CYBER DARK TERMINAL — Post / Page Layout
+// ============================================================
+@use "variables" as *;
+
+.post-wrapper,
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 760px) 1fr;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+
+  > * {
+    grid-column: 2;
+
+    @media (max-width: $bp-tablet) {
+      grid-column: 1;
+    }
+  }
+}
+
+// --- Post Header ---
+.post-header {
+  border-bottom: 1px solid $border-bright;
+  padding-bottom: $space-md;
+  margin-bottom: $space-lg;
+
+  .post-title {
+    font-size: 1.6rem;
+    color: $green-bright;
+    text-shadow: 0 0 16px rgba($green-bright, 0.6);
+    margin-bottom: $space-sm;
+  }
+
+  .post-meta {
+    font-size: 0.78rem;
+    color: $green-dim;
+    line-height: 2;
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-sm;
+      align-items: center;
+    }
+
+    .meta-date   { color: $amber; }
+    .meta-author { color: $cyan-accent; }
+    .meta-sep    { color: $green-ghost; }
+  }
+}
+
+// --- Post Body (file-viewer aesthetic) ---
+.post-body {
+  // CRT scanline effect on the post content area
+  position: relative;
+
+  &::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 3px,
+      rgba($black, 0.08) 3px,
+      rgba($black, 0.08) 6px
+    );
+    z-index: 1;
+    opacity: 0.35;
+  }
+
+  // Make sure content is above scanline
+  > * { position: relative; z-index: 2; }
+
+  // Line numbers appearance for paragraphs
+  p, li {
+    color: $white-dim;
+    font-size: 0.92rem;
+  }
+
+  h2 {
+    color: $cyan-accent;
+    border-bottom: 1px solid rgba($cyan-accent, 0.3);
+    padding-bottom: $space-xs;
+    margin-top: $space-lg;
+    font-size: 1.2rem;
+    text-shadow: 0 0 12px rgba($cyan-accent, 0.5);
+  }
+
+  h3 {
+    color: $amber;
+    margin-top: $space-lg;
+    font-size: 1.05rem;
+    text-shadow: 0 0 10px rgba($amber, 0.4);
+  }
+
+  h4, h5, h6 {
+    color: $green-bright;
+    margin-top: $space-md;
+  }
+
+  a {
+    color: $cyan-accent;
+    text-decoration: underline;
+    text-decoration-color: rgba($cyan-accent, 0.4);
+
+    &:hover {
+      text-decoration-color: $cyan-accent;
+    }
+  }
+
+  // Code blocks with line-style header
+  pre.highlight, div.highlight {
+    border: 1px solid $border-bright;
+    background: $bg-panel;
+    margin: $space-md 0;
+
+    &::before {
+      content: "// OUTPUT";
+      display: block;
+      font-size: 0.7rem;
+      color: $green-dim;
+      padding: 3px $space-sm;
+      border-bottom: 1px solid $border-color;
+      background: $bg-deep;
+      letter-spacing: 0.08em;
+    }
+  }
+}
+
+// --- Post Footer ---
+.post-footer {
+  margin-top: $space-xl;
+  border-top: 1px solid $border-color;
+  padding-top: $space-md;
+
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-md;
+    font-size: 0.82rem;
+
+    @media (max-width: $bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+
+    .nav-prev, .nav-next {
+      border: 1px solid $border-color;
+      padding: $space-sm;
+      transition: all $transition-mid;
+
+      &:hover {
+        border-color: $border-bright;
+        background: $bg-panel;
+      }
+
+      .nav-label {
+        color: $green-dim;
+        font-size: 0.72rem;
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      a { color: $green-mid; }
+    }
+
+    .nav-next { text-align: right; }
+  }
+}
+
+// --- Category / Tag Archive Pages ---
+.archive-page {
+  .archive-section {
+    margin-bottom: $space-xl;
+  }
+
+  .archive-heading {
+    color: $amber;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba($amber, 0.3);
+    padding-bottom: $space-xs;
+    margin-bottom: $space-md;
+    letter-spacing: 0.06em;
+  }
+
+  .archive-list {
+    list-style: none;
+    margin: 0;
+
+    li {
+      padding: $space-xs 0;
+      border-bottom: 1px solid $border-color;
+      color: $white-dim;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $space-sm;
+
+      &:hover {
+        background: $bg-panel;
+        padding-left: $space-sm;
+        transition: padding $transition-fast;
+      }
+
+      a { color: $green-mid; }
+      .archive-date { color: $green-ghost; font-size: 0.78rem; white-space: nowrap; }
+    }
+  }
+}

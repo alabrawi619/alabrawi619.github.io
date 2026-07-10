@@ -1,0 +1,52 @@
+---
+layout: default
+title: "ERROR 404 — FILE NOT FOUND"
+permalink: /404.html
+---
+
+<div class="status-bar">
+  <span class="status-left">[ SYSTEM ERROR ]</span>
+  <span class="status-right" style="color: #ff2222;">CRITICAL FAULT DETECTED</span>
+</div>
+
+<div class="term-box">
+  <div class="term-titlebar">
+    <span>KERNEL PANIC — 0x00000404</span>
+    <div class="term-controls">
+      <span>_</span><span>□</span><span>×</span>
+    </div>
+  </div>
+  <div class="term-body">
+    <pre class="ascii-art" style="color:#ff2222; text-shadow: 0 0 14px rgba(255,34,34,0.7);">
+ ██╗  ██╗ ██████╗ ██╗  ██╗
+ ██║  ██║██╔═████╗██║  ██║
+ ███████║██║██╔██║███████║
+ ╚════██║████╔╝██║╚════██║
+      ██║╚██████╔╝     ██║
+      ╚═╝ ╚═════╝      ╚═╝</pre>
+
+    <p style="color:#ff2222; margin:16px 0 8px;">*** STOP: 0x00000404 FILE_NOT_FOUND ***</p>
+    <p style="color:#ffb000;">The requested resource could not be located on this system.</p>
+    <p style="color:#008f11;">Check the address and try again, or consult the sysadmin.</p>
+
+    <div style="margin-top:24px; border-top:1px solid #003b0a; padding-top:16px;">
+      <p class="prompt-line">cd /home &amp;&amp; ls -la</p>
+      <p style="margin-top:12px; color:#008f11;">Available directories:</p>
+      <ul style="list-style:none; margin:8px 0; padding:0;">
+        <li style="padding:4px 0;"><a href="{{ '/' | relative_url }}">&gt; /home — Return to mainframe console</a></li>
+        <li style="padding:4px 0;"><a href="{{ '/about' | relative_url }}">&gt; /about — System information</a></li>
+        <li style="padding:4px 0;"><a href="{{ '/categories' | relative_url }}">&gt; /categories — Browse by category</a></li>
+        <li style="padding:4px 0;"><a href="{{ '/tags' | relative_url }}">&gt; /tags — Browse by tag</a></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:16px;">
+      <span class="prompt-line"></span><span class="cursor"></span>
+    </div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <span class="status-left" style="color:#ff2222;">ERROR: Resource not found on this filesystem</span>
+  <span class="status-right">Press any key to continue or navigate above</span>
+</div>

@@ -1,0 +1,36 @@
+---
+layout: default
+title: "CATEGORIES.IDX — Category Archive"
+permalink: /categories/
+---
+
+<div class="status-bar">
+  <span class="status-left">[ CATEGORIES.IDX — Index file ]</span>
+  <span class="status-right">{{ site.categories.size }} categories listed</span>
+</div>
+
+<div class="term-box">
+  <div class="term-titlebar">
+    <span>CATEGORY BROWSER</span>
+    <div class="term-controls"><span>_</span><span>□</span><span>×</span></div>
+  </div>
+  <div class="term-body archive-page">
+    <p class="prompt-line">ls -lR /var/categories/</p>
+
+    {% for category in site.categories %}
+    <div class="archive-section">
+      <h2 class="archive-heading" id="{{ category[0] | slugify }}">
+        &lt;{{ category[0] }}&gt; — {{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %}
+      </h2>
+      <ul class="archive-list">
+        {% for post in category[1] %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <span class="archive-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</div>

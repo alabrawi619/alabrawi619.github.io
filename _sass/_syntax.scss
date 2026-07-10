@@ -1,0 +1,88 @@
+// ============================================================
+// CYBER DARK TERMINAL — Rouge Syntax Highlighting
+// Themed as a classic monochrome terminal output
+// ============================================================
+@use "variables" as *;
+
+.highlight {
+  background: $bg-panel;
+  color: $green-mid;
+
+  // Line number table (when enabled)
+  table td { padding: 0; }
+  table td:first-child pre { padding-right: 0; }
+  table td:last-child pre  { padding-left: 0; }
+
+  // Gutter for line numbers
+  .gutter { color: $green-ghost; border-right: 1px solid $border-color; padding-right: $space-sm; user-select: none; }
+
+  // --- Token Types ---
+  .c   { color: $green-ghost; font-style: italic; }   // Comment
+  .c1  { color: $green-ghost; font-style: italic; }   // Comment.Single
+  .cm  { color: $green-ghost; font-style: italic; }   // Comment.Multi
+  .cp  { color: $amber; }                             // Comment.Preproc
+  .cs  { color: $amber; font-style: italic; }         // Comment.Special
+
+  .k   { color: $green-bright; font-weight: bold; }  // Keyword
+  .kc  { color: $green-bright; }                     // Keyword.Constant
+  .kd  { color: $green-bright; }                     // Keyword.Declaration
+  .kn  { color: $green-bright; }                     // Keyword.Namespace
+  .kp  { color: $green-bright; }                     // Keyword.Pseudo
+  .kr  { color: $green-bright; }                     // Keyword.Reserved
+  .kt  { color: $cyan-accent; }                      // Keyword.Type
+
+  .n   { color: $white-dim; }                        // Name
+  .na  { color: $cyan-accent; }                      // Name.Attribute
+  .nb  { color: $green-mid; }                        // Name.Builtin
+  .nc  { color: $amber; }                            // Name.Class
+  .nd  { color: $amber; }                            // Name.Decorator
+  .ne  { color: $red-alert; }                        // Name.Exception
+  .nf  { color: $cyan-accent; }                      // Name.Function
+  .ni  { color: $white-dim; }                        // Name.Entity
+  .nl  { color: $white-dim; }                        // Name.Label
+  .nn  { color: $amber; }                            // Name.Namespace
+  .no  { color: $amber; }                            // Name.Constant
+  .nt  { color: $green-bright; }                     // Name.Tag
+  .nv  { color: $white-dim; }                        // Name.Variable
+  .nx  { color: $white-dim; }                        // Name.Other
+
+  .o   { color: $green-bright; }                     // Operator
+  .ow  { color: $green-bright; font-weight: bold; }  // Operator.Word
+  .p   { color: $green-dim; }                        // Punctuation
+
+  .s   { color: $amber; }                            // Literal.String
+  .s1  { color: $amber; }
+  .s2  { color: $amber; }
+  .sb  { color: $amber; }
+  .sc  { color: $amber; }
+  .sd  { color: $amber; font-style: italic; }
+  .se  { color: $red-alert; }                        // Literal.String.Escape
+  .sh  { color: $amber; }
+  .si  { color: $cyan-accent; }                      // Literal.String.Interpol
+  .sr  { color: $cyan-accent; }                      // Literal.String.Regex
+  .ss  { color: $amber; }
+  .sx  { color: $amber; }
+
+  .m   { color: $magenta-dim; }                      // Literal.Number
+  .mb  { color: $magenta-dim; }
+  .mf  { color: $magenta-dim; }
+  .mh  { color: $magenta-dim; }
+  .mi  { color: $magenta-dim; }
+  .mo  { color: $magenta-dim; }
+  .il  { color: $magenta-dim; }
+
+  .ge  { font-style: italic; }                       // Generic.Emph
+  .gs  { font-weight: bold; }                        // Generic.Strong
+  .gd  { color: $red-alert; background: rgba($red-alert, 0.1); }   // Generic.Deleted
+  .gi  { color: $green-bright; background: rgba($green-bright, 0.1); } // Generic.Inserted
+  .gr  { color: $red-alert; }                        // Generic.Error
+  .gh  { color: $green-bright; font-weight: bold; }  // Generic.Heading
+  .gu  { color: $cyan-accent; }                      // Generic.Subheading
+  .go  { color: $green-ghost; }                      // Generic.Output
+  .gp  { color: $green-dim; }                        // Generic.Prompt
+  .gt  { color: $red-alert; }                        // Generic.Traceback
+  .w   { color: $green-ghost; }                      // Text.Whitespace
+
+  // Bash / shell specific
+  .err { color: $red-alert; background: rgba($red-alert, 0.15); }
+}

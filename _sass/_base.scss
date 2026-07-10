@@ -1,0 +1,187 @@
+// ============================================================
+// CYBER DARK TERMINAL — Base / Reset
+// ============================================================
+@use "variables" as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+  background-color: $bg-deep;
+  color: $green-mid;
+}
+
+body {
+  font-family: $font-mono;
+  background-color: $bg-deep;
+  color: $green-mid;
+  line-height: $line-height;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// CRT phosphor glow on all text
+body * {
+  text-shadow: 0 0 6px rgba($green-dim, 0.45);
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  background: $black;
+}
+::-webkit-scrollbar-thumb {
+  background: $green-ghost;
+  border-radius: 0;
+  &:hover { background: $green-dim; }
+}
+
+// Links
+a {
+  color: $green-bright;
+  text-decoration: none;
+  transition: color $transition-fast, text-shadow $transition-fast;
+
+  &:hover, &:focus {
+    color: $cyan-accent;
+    text-shadow: 0 0 10px rgba($cyan-accent, 0.8);
+    outline: none;
+  }
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  color: $green-bright;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  margin-bottom: $space-md;
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.1rem; }
+
+// Paragraphs
+p {
+  color: $white-dim;
+  margin-bottom: $space-md;
+}
+
+// Horizontal Rule
+hr {
+  border: none;
+  border-top: 1px solid $border-color;
+  margin: $space-lg 0;
+}
+
+// Code & Pre
+code {
+  font-family: $font-mono;
+  background: $bg-panel;
+  color: $cyan-accent;
+  padding: 2px 6px;
+  border: 1px solid $green-ghost;
+  font-size: 0.9em;
+}
+
+pre {
+  background: $bg-panel;
+  border: 1px solid $border-bright;
+  padding: $space-md;
+  overflow-x: auto;
+  margin-bottom: $space-md;
+  position: relative;
+
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: $green-bright;
+    font-size: 0.88rem;
+  }
+}
+
+// Blockquote
+blockquote {
+  border-left: 3px solid $amber;
+  padding-left: $space-md;
+  color: $amber;
+  margin-left: 0;
+  margin-bottom: $space-md;
+
+  p { color: $amber; }
+}
+
+// Lists
+ul, ol {
+  margin-left: $space-lg;
+  margin-bottom: $space-md;
+  color: $white-dim;
+
+  li { margin-bottom: $space-xs; }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid $border-color;
+  display: block;
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $space-md;
+  font-size: 0.9rem;
+
+  th {
+    color: $green-bright;
+    border-bottom: 1px solid $border-bright;
+    padding: $space-xs $space-sm;
+    text-align: left;
+  }
+
+  td {
+    color: $white-dim;
+    border-bottom: 1px solid $border-color;
+    padding: $space-xs $space-sm;
+  }
+
+  tr:hover td {
+    background: $bg-highlight;
+    color: $green-bright;
+  }
+}
+
+// Selection highlight
+::selection {
+  background: $green-dim;
+  color: $black;
+}
+
+// Input / textarea (for potential search/form use)
+input, textarea, select {
+  font-family: $font-mono;
+  background: $bg-panel;
+  color: $green-bright;
+  border: 1px solid $border-bright;
+  padding: $space-xs $space-sm;
+  font-size: 0.9rem;
+  outline: none;
+
+  &:focus {
+    border-color: $green-bright;
+    box-shadow: 0 0 8px rgba($green-bright, 0.4);
+  }
+}

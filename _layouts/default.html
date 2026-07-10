@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include header.html %}
+
+    <main id="main-content" role="main">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+  </div><!-- /.site-wrapper -->
+
+  <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
+</body>
+</html>
