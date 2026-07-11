@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<div class="wrap blog-doc-layout">
+  {% include blog-sidebar.html %}
+  <article class="blog-doc-content reveal">
+    <header class="page-header">
+      <h1 class="page-title">{{ page.title }}</h1>
+      {% if page.description %}<p class="page-subtitle">{{ page.description }}</p>{% endif %}
+    </header>
+    <div class="prose">
+      {{ content }}
+    </div>
+  </article>
+</div>

@@ -6,6 +6,68 @@
 // --- Generic page / post wrappers ---
 .page, .post { padding-block: $s-6; }
 
+// --- Blogs docs layout (folder-driven sidebar) ---
+.blog-doc-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: $s-5;
+  padding-block: $s-6;
+  align-items: start;
+}
+.blog-sidebar {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  border: 1px solid $line;
+  border-radius: $radius;
+  background: $bg-panel;
+  padding: $s-3;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
+.blog-nav-home {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-muted;
+  padding: $s-1 $s-2 $s-2;
+  &.active { color: $neon-cyan; }
+}
+.blog-nav-section { margin-top: $s-3; }
+.blog-nav-title {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $neon-magenta;
+  margin-bottom: $s-1;
+  padding-inline: $s-2;
+}
+.blog-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  a {
+    display: block;
+    padding: 6px $s-2;
+    border-radius: 8px;
+    color: $text-muted;
+    font-size: 0.92rem;
+    border-left: 2px solid transparent;
+    transition: color $t-fast, background $t-fast, border-color $t-fast;
+    &:hover { color: $text; background: rgba($neon-cyan, 0.06); }
+    &.active {
+      color: $neon-cyan;
+      background: rgba($neon-cyan, 0.08);
+      border-left-color: $neon-cyan;
+    }
+  }
+}
+.blog-doc-content { min-width: 0; }
+
 .page-header, .post-header { margin-bottom: $s-5; }
 .page-title, .post-title {
   font-size: clamp(1.9rem, 5vw, 3rem);

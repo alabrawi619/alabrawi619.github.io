@@ -72,8 +72,13 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-// Reveal-on-scroll (IntersectionObserver adds .is-visible)
+// Reveal-on-scroll (IntersectionObserver adds .is-visible).
+// Only hide content when JS is available (html.js) so the site never gets
+// stuck on invisible content if scripts fail to load or run.
 .reveal {
+  &.is-visible { opacity: 1; transform: none; }
+}
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;

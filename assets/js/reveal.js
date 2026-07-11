@@ -25,5 +25,11 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
 
     targets.forEach(function (el) { observer.observe(el); });
+
+    // Failsafe: never leave content invisible. If for any reason the observer
+    // hasn't revealed an element after a short delay, reveal it directly.
+    window.setTimeout(function () {
+      document.querySelectorAll(".reveal:not(.is-visible)").forEach(activate);
+    }, 1500);
   });
 })();
