@@ -15,6 +15,9 @@
         if (emptyMsg) emptyMsg.hidden = false;
         return;
       }
+      // Graph has data — make sure the empty-state overlay is hidden so it can
+      // never sit on top of the rendered SVG.
+      if (emptyMsg) emptyMsg.hidden = true;
       render(data);
     }).catch(function () {
       if (emptyMsg) {
@@ -83,9 +86,36 @@
         .attr("text-anchor", "middle")
         .text(function (d) { return d.label; });
 
-      node.on("mouseover", function (event, d) { showTip(event, d); })
+      // Adjacency map for neighbour highlighting.
+      var neighbors = {};
+      data.links.forEach(function (l) {
+        var s = typeof l.source === "object" ? l.source.id : l.source;
+        var t = typeof l.target === "object" ? l.target.id : l.target;
+        (neighbors[s] = neighbors[s] || {})[t] = true;
+        (neighbors[t] = neighbors[t] || {})[s] = true;
+      });
+      function isConnected(a, b) {
+        return a === b || (neighbors[a] && neighbors[a][b]);
+      }
+
+      function highlight(d) {
+        svg.classed("is-hovering", true);
+        node.classed("is-active", function (n) { return n.id === d.id; })
+          .classed("is-neighbor", function (n) { return n.id !== d.id && isConnected(d.id, n.id); });
+        link.classed("is-active", function (l) {
+          var s = l.source.id || l.source, t = l.target.id || l.target;
+          return s === d.id || t === d.id;
+        });
+      }
+      function clearHighlight() {
+        svg.classed("is-hovering", false);
+        node.classed("is-active", false).classed("is-neighbor", false);
+        link.classed("is-active", false);
+      }
+
+      node.on("mouseover", function (event, d) { showTip(event, d); highlight(d); })
         .on("mousemove", moveTip)
-        .on("mouseout", hideTip)
+        .on("mouseout", function () { hideTip(); clearHighlight(); })
         .on("click", function (event, d) {
           if (d.type === "post" && d.url) window.location.href = d.url;
         });

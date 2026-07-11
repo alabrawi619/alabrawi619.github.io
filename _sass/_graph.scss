@@ -42,6 +42,18 @@
 .node-post circle { color: $neon-cyan; filter: drop-shadow(0 0 5px rgba($neon-cyan, 0.5)); }
 .node-tag circle { color: $neon-magenta; filter: drop-shadow(0 0 5px rgba($neon-magenta, 0.5)); }
 
+// Hover-highlight: while a node is focused the graph fades unrelated nodes
+// and links so the neighbourhood stands out.
+.graph-svg.is-hovering {
+  .graph-node,
+  .graph-link { opacity: 0.15; transition: opacity $t-fast; }
+  .graph-node.is-active,
+  .graph-node.is-neighbor,
+  .graph-link.is-active { opacity: 1; }
+  .graph-node.is-active circle { filter: drop-shadow(0 0 10px currentColor); }
+}
+.graph-link.is-active { stroke: $neon-cyan; stroke-width: 1.6px; }
+
 .graph-label {
   fill: $text-muted;
   font-family: $font-mono;
@@ -78,6 +90,11 @@
   font-family: $font-mono;
   padding: $s-4;
   text-align: center;
+
+  // Never let the empty-state overlay intercept pointer events — even if it
+  // is somehow shown while the graph has rendered, clicks/drags must reach
+  // the SVG underneath so the graph stays fully interactive.
+  pointer-events: none;
 
   // The class `display: flex` overrides the browser default for [hidden],
   // so honour the attribute explicitly — otherwise this empty-state overlay

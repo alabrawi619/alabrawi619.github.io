@@ -1,0 +1,155 @@
+// ============================================================
+// Cyber Dark — old-PC / CRT monitor frame + screen effects
+// ============================================================
+@use "variables" as *;
+@use "sass:color";
+
+// The whole document sits "inside" the monitor: leave room for the beige
+// bezel so real content is never hidden behind the frame.
+body {
+  padding: $crt-frame $crt-frame $crt-frame-bottom $crt-frame;
+}
+
+// Keep the sticky header pinned just below the top bezel.
+.site-header { top: $crt-frame; }
+
+// ------------------------------------------------------------
+// Beige monitor bezel — a fixed frame that rings the viewport.
+// pointer-events: none so everything underneath stays interactive.
+// Per-side border colours fake the moulded-plastic bevel and, unlike
+// border-image, honour border-radius for rounded monitor corners.
+// ------------------------------------------------------------
+.crt-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  border-style: solid;
+  border-width: $crt-frame $crt-frame $crt-frame-bottom $crt-frame;
+  border-top-color: $crt-bezel-light;
+  border-left-color: $crt-bezel;
+  border-right-color: $crt-bezel-dark;
+  border-bottom-color: $crt-bezel-dark;
+  border-radius: 26px;
+  // Dark inner screen lip + soft inner shadow give the tube some depth.
+  box-shadow:
+    inset 0 0 0 2px rgba(#000, 0.7),
+    inset 0 0 30px rgba(#000, 0.55);
+}
+
+// Power LED on the bottom bezel.
+.crt-frame::after {
+  content: "";
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $crt-led;
+  box-shadow: 0 0 8px $crt-led, inset 0 0 2px #fff;
+  animation: crt-led 3.5s ease-in-out infinite;
+}
+
+// Printed model label on the bottom bezel.
+.crt-frame::before {
+  content: attr(data-model);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  text-align: center;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color.adjust($crt-bezel-dark, $lightness: -10%);
+  text-shadow: 0 1px 0 $crt-bezel-light;
+}
+
+@keyframes crt-led {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+// ------------------------------------------------------------
+// Screen effects overlay — scanlines, curvature vignette, flicker.
+// ------------------------------------------------------------
+.crt-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  // Vignette darkens the corners to mimic a curved CRT tube.
+  background: radial-gradient(
+    120% 120% at 50% 50%,
+    transparent 58%,
+    rgba(#000, 0.28) 88%,
+    rgba(#000, 0.55) 100%
+  );
+  // One-time power-on flash when the page loads.
+  animation: crt-power-on 1.1s ease-out 1;
+}
+
+// Horizontal scanlines.
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(#000, 0.16) 0,
+    rgba(#000, 0.16) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+// Subtle animated flicker + rolling scanline sweep.
+.crt-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba($neon-cyan, 0.05),
+    transparent 40%
+  );
+  opacity: 0;
+  animation: crt-flicker 6s steps(60) infinite;
+}
+
+@keyframes crt-flicker {
+  0%, 92%, 100% { opacity: 0; transform: translateY(0); }
+  93%           { opacity: 0.12; }
+  96%           { opacity: 0.04; transform: translateY(30vh); }
+  99%           { opacity: 0.1; transform: translateY(80vh); }
+}
+
+@keyframes crt-power-on {
+  0%   { opacity: 0; }
+  8%   { opacity: 1; background-color: rgba(#fff, 0.85); }
+  14%  { background-color: transparent; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-screen,
+  .crt-screen::after,
+  .crt-frame::after { animation: none; }
+}
+
+// Smaller frame on phones so it doesn't crowd the content.
+@media (max-width: $bp-sm) {
+  body {
+    padding: 10px 10px 32px 10px;
+  }
+  .site-header { top: 10px; }
+  .crt-frame {
+    border-width: 10px 10px 32px 10px;
+    border-radius: 16px;
+  }
+  .crt-frame::before { font-size: 9px; letter-spacing: 0.14em; bottom: 10px; }
+  .crt-frame::after { bottom: 12px; right: 16px; }
+}

@@ -35,13 +35,7 @@
   color: $text;
   &:hover { color: $text; }
 }
-.brand-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: $neon-cyan;
-  box-shadow: 0 0 12px $neon-cyan;
-}
+.brand-name { display: inline-block; }
 .site-nav {
   display: flex;
   gap: $s-4;
@@ -100,7 +94,7 @@
   color: transparent;
 }
 
-// --- Glitch effect (fires every 3s) ---
+// --- Glitch effect (fires on hover) ---
 .glitch {
   position: relative;
   display: inline-block;
@@ -120,37 +114,34 @@
   pointer-events: none;
   opacity: 0;
 }
-.glitch::before {
-  color: $neon-magenta;
-  animation: glitch-before 3s infinite linear;
-}
-.glitch::after {
-  color: $neon-cyan;
-  animation: glitch-after 3s infinite linear;
-}
+.glitch::before { color: $neon-magenta; }
+.glitch::after { color: $neon-cyan; }
 
-// The bulk of each 3s cycle is idle (opacity 0); a short burst near the start
-// produces the glitch, so the name "shatters" once every three seconds.
+// The glitch only runs while the element is hovered/focused, so the name
+// "shatters" on interaction rather than on a timer.
+.glitch:hover::before,
+.glitch:focus-visible::before { animation: glitch-before 0.5s steps(2, jump-none) infinite; }
+.glitch:hover::after,
+.glitch:focus-visible::after { animation: glitch-after 0.5s steps(2, jump-none) infinite; }
+
 @keyframes glitch-before {
   0%   { opacity: 0.85; transform: translate(-3px, -2px); clip-path: inset(0 0 68% 0); }
-  1.5% { transform: translate(3px, 1px);  clip-path: inset(45% 0 30% 0); }
-  3%   { transform: translate(-2px, 2px); clip-path: inset(72% 0 8% 0); }
-  4.5% { opacity: 0.85; transform: translate(2px, -1px); clip-path: inset(18% 0 55% 0); }
-  6%   { opacity: 0; transform: translate(0, 0); }
-  100% { opacity: 0; transform: translate(0, 0); }
+  25%  { opacity: 0.85; transform: translate(3px, 1px);  clip-path: inset(45% 0 30% 0); }
+  50%  { opacity: 0.85; transform: translate(-2px, 2px); clip-path: inset(72% 0 8% 0); }
+  75%  { opacity: 0.85; transform: translate(2px, -1px); clip-path: inset(18% 0 55% 0); }
+  100% { opacity: 0.85; transform: translate(-3px, -2px); clip-path: inset(0 0 68% 0); }
 }
 @keyframes glitch-after {
   0%   { opacity: 0.85; transform: translate(3px, 2px);  clip-path: inset(60% 0 5% 0); }
-  1.5% { transform: translate(-3px, -1px); clip-path: inset(15% 0 62% 0); }
-  3%   { transform: translate(2px, -2px);  clip-path: inset(38% 0 40% 0); }
-  4.5% { opacity: 0.85; transform: translate(-2px, 1px); clip-path: inset(78% 0 4% 0); }
-  6%   { opacity: 0; transform: translate(0, 0); }
-  100% { opacity: 0; transform: translate(0, 0); }
+  25%  { opacity: 0.85; transform: translate(-3px, -1px); clip-path: inset(15% 0 62% 0); }
+  50%  { opacity: 0.85; transform: translate(2px, -2px);  clip-path: inset(38% 0 40% 0); }
+  75%  { opacity: 0.85; transform: translate(-2px, 1px); clip-path: inset(78% 0 4% 0); }
+  100% { opacity: 0.85; transform: translate(3px, 2px);  clip-path: inset(60% 0 5% 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .glitch::before,
-  .glitch::after { animation: none; display: none; }
+  .glitch::after { animation: none !important; display: none; }
 }
 .hero-bio {
   margin: $s-3 auto $s-5;

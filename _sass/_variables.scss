@@ -51,3 +51,11 @@ $bp-lg: 1024px;
 // --- Motion ---
 $t-fast: 0.15s ease;
 $t-mid:  0.3s ease;
+
+// --- CRT / old-PC monitor frame ---
+$crt-bezel:        #cfc7b2;  // beige monitor plastic
+$crt-bezel-dark:   #6f6a58;  // shaded plastic edge
+$crt-bezel-light:  #eee7d4;  // plastic highlight
+$crt-frame:        18px;     // side / top bezel thickness
+$crt-frame-bottom: 46px;     // bottom bezel (holds label + LED)
+$crt-led:          $neon-green;
