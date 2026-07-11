@@ -24,13 +24,8 @@ kramdown:
 
 permalink: /:year/:month/:day/:title/
 
-# --- Pagination (jekyll-paginate) ---
-paginate: 6
-paginate_path: "/blog/page:num/"
-
 # --- Plugins ---
 plugins:
-  - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-feed
 
