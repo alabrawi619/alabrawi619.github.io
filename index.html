@@ -11,9 +11,9 @@ title: null
     <p class="hero-bio">{{ site.author.bio | default: site.description }}</p>
 
     <nav class="cyber-nav" aria-label="Primary">
-      <a class="cyber-btn" href="{{ '/blog/' | relative_url }}">
-        <span class="cyber-btn-label">Blog</span>
-        <span class="cyber-btn-sub">read the posts</span>
+      <a class="cyber-btn" href="{{ '/blogs/' | relative_url }}">
+        <span class="cyber-btn-label">Blogs</span>
+        <span class="cyber-btn-sub">read the notes</span>
       </a>
       <a class="cyber-btn" href="{{ '/tags/' | relative_url }}">
         <span class="cyber-btn-label">Tags</span>
@@ -58,9 +58,6 @@ title: null
       </li>
       {% endfor %}
     </ul>
-    <div class="section-more reveal">
-      <a class="ghost-btn" href="{{ '/blog/' | relative_url }}">View all posts →</a>
-    </div>
     {% else %}
     <p class="empty reveal">No posts yet. Check back soon.</p>
     {% endif %}

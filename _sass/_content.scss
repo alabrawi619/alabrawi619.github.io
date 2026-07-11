@@ -198,15 +198,4 @@
 .tag-group { margin-bottom: $s-5; scroll-margin-top: 80px; }
 .tag-heading { font-size: 1.4rem; margin-bottom: $s-3; color: $neon-cyan; }
 
-// --- Pagination ---
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $s-4;
-  margin-top: $s-6;
-  font-family: $font-mono;
-  .page-count { color: $text-muted; font-size: 0.9rem; }
-}
-
 .empty { color: $text-muted; }
