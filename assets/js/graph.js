@@ -34,8 +34,8 @@
     }
 
     // Neon palette (kept in sync with SCSS variables).
-    var COLOR_POST = "#00e5ff";
-    var COLOR_TAG = "#ff2bd6";
+    var COLOR_BLOG = "#00e5ff";
+    var COLOR_SECTION = "#ff2bd6";
 
     function render(data) {
       var dim = size();
@@ -78,7 +78,7 @@
 
       node.append("circle")
         .attr("r", radius)
-        .attr("fill", function (d) { return d.type === "post" ? COLOR_POST : COLOR_TAG; });
+        .attr("fill", function (d) { return d.type === "blog" ? COLOR_BLOG : COLOR_SECTION; });
 
       node.append("text")
         .attr("class", "graph-label")
@@ -117,7 +117,7 @@
         .on("mousemove", moveTip)
         .on("mouseout", function () { hideTip(); clearHighlight(); })
         .on("click", function (event, d) {
-          if (d.type === "post" && d.url) window.location.href = d.url;
+          if (d.type === "blog" && d.url) window.location.href = d.url;
         });
 
       simulation.on("tick", function () {
@@ -138,15 +138,15 @@
     }
 
     function radius(d) {
-      if (d.type === "tag") return 5 + Math.min(d.count || 1, 6);
+      if (d.type === "section") return 5 + Math.min(d.count || 1, 6);
       return 10;
     }
 
     function showTip(event, d) {
       if (!tooltip) return;
-      var html = d.type === "post"
-        ? "<strong>" + escapeHtml(d.label) + "</strong><span>" + escapeHtml(d.date || "") + "</span>"
-        : "<strong>#" + escapeHtml(d.label) + "</strong><span>" + (d.count || 0) + " post" + ((d.count || 0) === 1 ? "" : "s") + "</span>";
+      var html = d.type === "blog"
+        ? "<strong>" + escapeHtml(d.label) + "</strong><span>" + escapeHtml(d.section || "") + "</span>"
+        : "<strong>" + escapeHtml(d.label) + "</strong><span>" + (d.count || 0) + " blog" + ((d.count || 0) === 1 ? "" : "s") + "</span>";
       tooltip.innerHTML = html;
       tooltip.hidden = false;
       moveTip(event);
