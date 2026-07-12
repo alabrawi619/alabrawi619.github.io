@@ -39,8 +39,8 @@
   }
   &:hover circle { filter: drop-shadow(0 0 8px currentColor); }
 }
-.node-post circle { color: $neon-cyan; filter: drop-shadow(0 0 5px rgba($neon-cyan, 0.5)); }
-.node-tag circle { color: $neon-magenta; filter: drop-shadow(0 0 5px rgba($neon-magenta, 0.5)); }
+.node-blog circle { color: $neon-cyan; filter: drop-shadow(0 0 5px rgba($neon-cyan, 0.5)); }
+.node-section circle { color: $neon-magenta; filter: drop-shadow(0 0 5px rgba($neon-magenta, 0.5)); }
 
 // Hover-highlight: while a node is focused the graph fades unrelated nodes
 // and links so the neighbourhood stands out.
@@ -77,8 +77,8 @@
 }
 .legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.legend-post { background: $neon-cyan; box-shadow: 0 0 8px $neon-cyan; }
-.legend-tag { background: $neon-magenta; box-shadow: 0 0 8px $neon-magenta; }
+.legend-blog { background: $neon-cyan; box-shadow: 0 0 8px $neon-cyan; }
+.legend-section { background: $neon-magenta; box-shadow: 0 0 8px $neon-magenta; }
 
 .graph-empty {
   position: absolute;

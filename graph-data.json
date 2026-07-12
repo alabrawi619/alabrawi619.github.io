@@ -2,34 +2,37 @@
 layout: null
 sitemap: false
 ---
+{%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" -%}
+{%- assign sections = blog_docs | group_by_exp: "b", "b.dir | split: '/blogs/' | last | split: '/' | first" -%}
 {
   "nodes": [
-    {%- for post in site.posts -%}
+    {%- for blog in blog_docs -%}
+    {%- assign section = blog.dir | split: '/blogs/' | last | split: '/' | first -%}
     {
-      "id": {{ post.url | jsonify }},
-      "label": {{ post.title | jsonify }},
-      "type": "post",
-      "date": {{ post.date | date: "%b %-d, %Y" | jsonify }},
-      "url": {{ post.url | relative_url | jsonify }}
+      "id": {{ blog.url | jsonify }},
+      "label": {{ blog.title | default: blog.name | jsonify }},
+      "type": "blog",
+      "section": {{ section | jsonify }},
+      "url": {{ blog.url | relative_url | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
-    {%- if site.posts.size > 0 and site.tags.size > 0 -%},{%- endif -%}
-    {%- for tag in site.tags -%}
+    {%- if blog_docs.size > 0 and sections.size > 0 -%},{%- endif -%}
+    {%- for section in sections -%}
     {
-      "id": {{ tag[0] | prepend: "tag::" | jsonify }},
-      "label": {{ tag[0] | jsonify }},
-      "type": "tag",
-      "count": {{ tag[1].size }}
+      "id": {{ section.name | prepend: "section::" | jsonify }},
+      "label": {{ section.name | jsonify }},
+      "type": "section",
+      "count": {{ section.items.size }}
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ],
   "links": [
     {%- assign first = true -%}
-    {%- for tag in site.tags -%}
-      {%- assign tagid = tag[0] | prepend: "tag::" -%}
-      {%- for post in tag[1] -%}
+    {%- for section in sections -%}
+      {%- assign sectionid = section.name | prepend: "section::" -%}
+      {%- for blog in section.items -%}
         {%- unless first -%},{%- endunless -%}
-        { "source": {{ post.url | jsonify }}, "target": {{ tagid | jsonify }} }
+        { "source": {{ blog.url | jsonify }}, "target": {{ sectionid | jsonify }} }
         {%- assign first = false -%}
       {%- endfor -%}
     {%- endfor -%}
