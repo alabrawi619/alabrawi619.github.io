@@ -31,38 +31,37 @@ title: null
       {% endif %}
     </nav>
   </div>
-  <a class="scroll-cue" href="#latest" aria-label="Scroll to latest posts">▾</a>
+  <a class="scroll-cue" href="#latest" aria-label="Scroll to latest blogs">▾</a>
 </section>
 
-<!-- ===== SECTION 2: LATEST POSTS ===== -->
+<!-- ===== SECTION 2: LATEST BLOGS ===== -->
 <section class="home-section" id="latest">
   <div class="wrap">
     <div class="section-head reveal">
-      <h2 class="section-title">Latest Posts</h2>
+      <h2 class="section-title">Latest Blogs</h2>
       <p class="section-sub">Fresh notes, experiments, and ideas.</p>
     </div>
 
-    {% assign recent_posts = site.posts | slice: 0, 6 %}
-    {% if recent_posts.size > 0 %}
+    {% assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" %}
+    {% assign recent_blogs = blog_docs | slice: 0, 6 %}
+    {% if recent_blogs.size > 0 %}
     <ul class="post-list post-grid">
-      {% for post in recent_posts %}
+      {% for blog in recent_blogs %}
       <li class="post-card reveal">
-        <a class="post-card-link" href="{{ post.url | relative_url }}">
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <h2>{{ post.title | escape }}</h2>
-          <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-          {% if post.tags.size > 0 %}
-          <div class="card-tags">{% for tag in post.tags %}<span class="chip chip-tag">#{{ tag }}</span>{% endfor %}</div>
-          {% endif %}
+        <a class="post-card-link" href="{{ blog.url | relative_url }}">
+          <span class="card-section">{{ blog.dir | split: '/blogs/' | last | split: '/' | first }}</span>
+          <h2>{{ blog.title | default: blog.name | escape }}</h2>
+          <p>{{ blog.description | default: blog.content | strip_html | truncate: 140 }}</p>
         </a>
       </li>
       {% endfor %}
     </ul>
     {% else %}
-    <p class="empty reveal">No posts yet. Check back soon.</p>
+    <p class="empty reveal">No blogs yet. Check back soon.</p>
     {% endif %}
   </div>
 </section>
+
 
 <!-- ===== SECTION 3: KNOWLEDGE GRAPH ===== -->
 <section class="graph-section" id="graph">

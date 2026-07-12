@@ -182,6 +182,7 @@
 }
 .post-card-link { display: block; padding: $s-4; color: $text; }
 .post-card time { font-family: $font-mono; font-size: 0.8rem; color: $text-faint; }
+.card-section { display: inline-block; font-family: $font-mono; font-size: 0.8rem; color: $text-faint; text-transform: uppercase; letter-spacing: 0.08em; }
 .post-card h2 { font-size: 1.35rem; margin: $s-1 0 $s-2; }
 .post-card p { color: $text-muted; margin-bottom: $s-3; }
 .card-tags { display: flex; flex-wrap: wrap; gap: $s-2; }
