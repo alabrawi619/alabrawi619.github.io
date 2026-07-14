@@ -1,16 +1,21 @@
 ---
 layout: blog-doc
 title: Blogs
-description: Folder-organised notes. Sections in the sidebar are driven by the sub-directories under blogs/.
+description: Blogs and the sections that connect them. Drag nodes, hover for details.
 ---
 
-Welcome to the blogs area. Every Markdown file you drop under
-`blogs/<section>/<name>.md` shows up automatically in the sidebar, grouped by
-its section folder.
+<section class="graph-section" id="graph">
+  <div class="graph-shell reveal">
+    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of blogs and sections">
+      <p class="graph-empty" hidden>No blogs yet — the graph will grow as you publish.</p>
+    </div>
+    <div class="graph-legend">
+      <span class="legend-item"><span class="legend-dot legend-blog"></span>Blog</span>
+      <span class="legend-item"><span class="legend-dot legend-section"></span>Section</span>
+    </div>
+    <div id="graph-tooltip" class="graph-tooltip" role="tooltip" hidden></div>
+  </div>
+</section>
 
-- `blogs/cloud/aws.md` &rarr; **cloud** section
-- `blogs/cyber/nmap.md` &rarr; **cyber** section
-
-Add a new folder to create a new section, or a new `.md` file to add an entry
-to an existing one. Give each file a `layout: blog-doc` and a `title:` in its
-front matter and it will appear in the navigation.
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
+<script src="{{ '/assets/js/graph.js' | relative_url }}" defer></script>

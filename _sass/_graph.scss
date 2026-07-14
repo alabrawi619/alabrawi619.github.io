@@ -8,6 +8,13 @@
 }
 .graph-head { margin-bottom: $s-5; }
 
+// When the graph lives inside the folder-driven blogs layout it must stay
+// within the content column rather than spanning the full viewport width.
+.blog-doc-content {
+  .graph-section { padding: 0; }
+  .graph-shell { width: 100%; }
+}
+
 .graph-shell {
   position: relative;
   width: min(1400px, 94vw);
