@@ -35,10 +35,10 @@ blog_landing: true
       {%- unless section.parent -%}
       <details class="category-card" open>
         <summary>
-          {%- assign category_count = section.descendants.size | plus: 1 -%}
+          {%- assign total_category_count = section.descendants.size | plus: 1 -%}
           <span class="category-folder" aria-hidden="true">▰</span>
           <a href="{{ section.url | relative_url }}">{{ section.name }}</a>
-          <span class="category-meta">{{ category_count }} {% if category_count == 1 %}category{% else %}categories{% endif %}, {{ section.total_count }} {% if section.total_count == 1 %}post{% else %}posts{% endif %}</span>
+          <span class="category-meta">{{ total_category_count }} {% if total_category_count == 1 %}category{% else %}categories{% endif %}, {{ section.total_count }} {% if section.total_count == 1 %}post{% else %}posts{% endif %}</span>
           <span class="category-chevron" aria-hidden="true"></span>
         </summary>
         <div class="category-children">
