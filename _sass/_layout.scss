@@ -255,7 +255,7 @@
 
   .post-card {
     flex: 1 1 280px;
-    max-width: 370px;
+    max-width: calc(($wrap-max - 5 * $s-4) / 4);
   }
 }
 
