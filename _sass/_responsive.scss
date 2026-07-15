@@ -16,12 +16,7 @@
 
   .blog-doc-main { padding: $s-4 $s-3; }
   .blog-doc-layout {
-    --sidebar-w: min(240px, 48vw);
     min-height: calc(100vh - 56px);
-  }
-  .blog-sidebar {
-    top: 56px;
-    padding-inline: $s-2;
   }
 
   .blog-landing {
