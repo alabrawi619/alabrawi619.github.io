@@ -48,6 +48,7 @@
 
 @media (max-width: $bp-sm) {
   .wrap { padding-inline: $s-3; }
+  .header-inner, .footer-inner { padding-inline: $s-3; }
   .site-nav a[href*="github.com"] { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: $s-1; }
   .graph-legend { font-size: 0.7rem; }
