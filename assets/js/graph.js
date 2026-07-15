@@ -39,6 +39,7 @@
 
     function render(data) {
       var dim = size();
+      setLayoutTargets(data, dim);
 
       var svg = d3.select(container)
         .append("svg")
@@ -65,8 +66,8 @@
         // (unconnected) blog↔section pairs drift to opposite edges and leave
         // the canvas looking empty; forceX/forceY keep the whole graph
         // gathered and centered regardless of connectivity.
-        .force("x", d3.forceX(dim.w / 2).strength(0.08))
-        .force("y", d3.forceY(dim.h / 2).strength(0.08))
+        .force("x", d3.forceX(function (d) { return d.targetX; }).strength(0.13))
+        .force("y", d3.forceY(function (d) { return d.targetY; }).strength(0.13))
         .force("collide", d3.forceCollide().radius(function (d) { return radius(d) + 10; }));
 
       var link = root.append("g")
@@ -146,11 +147,46 @@
 
       window.addEventListener("resize", function () {
         var d2 = size();
+        setLayoutTargets(data, d2);
         svg.attr("viewBox", [0, 0, d2.w, d2.h]);
         simulation.force("center", d3.forceCenter(d2.w / 2, d2.h / 2));
-        simulation.force("x", d3.forceX(d2.w / 2).strength(0.08));
-        simulation.force("y", d3.forceY(d2.h / 2).strength(0.08));
+        simulation.force("x", d3.forceX(function (d) { return d.targetX; }).strength(0.13));
+        simulation.force("y", d3.forceY(function (d) { return d.targetY; }).strength(0.13));
         simulation.alpha(0.3).restart();
+      });
+    }
+
+    function setLayoutTargets(data, dim) {
+      var sections = data.nodes.filter(function (d) { return d.type === "section"; });
+      var sectionsById = {};
+      var ring = Math.min(dim.w, dim.h) * (sections.length > 1 ? 0.24 : 0);
+
+      sections.forEach(function (section, index) {
+        var angle = -Math.PI / 2 + (Math.PI * 2 * index / Math.max(sections.length, 1));
+        sectionsById[section.id] = section;
+        section.targetX = dim.w / 2 + Math.cos(angle) * ring;
+        section.targetY = dim.h / 2 + Math.sin(angle) * ring;
+        section.x = section.x == null ? section.targetX : section.x;
+        section.y = section.y == null ? section.targetY : section.y;
+      });
+
+      var blogsBySection = {};
+      data.nodes.filter(function (d) { return d.type === "blog"; }).forEach(function (blog) {
+        (blogsBySection[blog.section] = blogsBySection[blog.section] || []).push(blog);
+      });
+
+      Object.keys(blogsBySection).forEach(function (sectionName) {
+        var section = sectionsById["section::" + sectionName];
+        var blogs = blogsBySection[sectionName];
+        if (!section) return;
+        blogs.forEach(function (blog, index) {
+          var spread = (index - (blogs.length - 1) / 2) * 0.55;
+          var angle = Math.atan2(section.targetY - dim.h / 2, section.targetX - dim.w / 2) + spread;
+          blog.targetX = section.targetX + Math.cos(angle) * 92;
+          blog.targetY = section.targetY + Math.sin(angle) * 92;
+          blog.x = blog.x == null ? blog.targetX : blog.x;
+          blog.y = blog.y == null ? blog.targetY : blog.y;
+        });
       });
     }
 

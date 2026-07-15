@@ -1,10 +1,13 @@
 ---
 layout: default
 ---
-<div class="blog-doc-layout" data-blog-doc>
+<div class="blog-doc-layout{% if page.blog_landing %} blog-landing-layout{% endif %}"{% unless page.blog_landing %} data-blog-doc{% endunless %}>
+  {% unless page.blog_landing %}
   {% include blog-sidebar.html %}
   <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+  {% endunless %}
   <div class="blog-doc-main">
+    {% unless page.blog_landing %}
     <div class="blog-doc-bar">
       <button type="button" class="sidebar-toggle" data-sidebar-toggle aria-controls="blog-sidebar" aria-expanded="true" aria-label="Toggle sidebar">
         <span class="sidebar-toggle-box">
@@ -14,8 +17,10 @@ layout: default
         </span>
       </button>
     </div>
-    <article class="blog-doc-content reveal">
+    {% endunless %}
+    <article class="blog-doc-content{% if page.blog_landing %} blog-landing{% endif %} reveal">
       <header class="page-header">
+        {% if page.blog_landing %}<span class="page-kicker">// knowledge base</span>{% endif %}
         <h1 class="page-title">{{ page.title }}</h1>
         {% if page.description %}<p class="page-subtitle">{{ page.description }}</p>{% endif %}
       </header>
