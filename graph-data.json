@@ -5,7 +5,9 @@ sitemap: false
 {%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" -%}
 {%- assign blog_tags = "" | split: "" -%}
 {%- for blog in blog_docs -%}
-  {%- assign blog_tags = blog_tags | concat: blog.tags -%}
+  {%- if blog.tags -%}
+    {%- assign blog_tags = blog_tags | concat: blog.tags -%}
+  {%- endif -%}
 {%- endfor -%}
 {%- assign blog_tags = blog_tags | uniq | sort -%}
 {

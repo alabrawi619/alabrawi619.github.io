@@ -4,8 +4,28 @@
   subsections, even when the parent directory contains no pages of its own.
 {%- endcomment -%}
 <aside class="blog-sidebar" id="blog-sidebar">
+  <div class="blog-sidebar-profile">
+    <a class="blog-sidebar-avatar" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+      <span aria-hidden="true">{{ site.author.name | default: site.title | slice: 0 | upcase }}</span>
+    </a>
+    <a class="blog-sidebar-title" href="{{ '/' | relative_url }}">{{ site.author.name | default: site.title }}</a>
+    <p>{{ site.author.bio | default: site.description }}</p>
+  </div>
+
+  <nav class="blog-primary-nav" aria-label="Main navigation">
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active" aria-current="page"{% endif %}>
+      <span class="blog-nav-icon" aria-hidden="true">⌂</span><span>Home</span>
+    </a>
+    <a href="{{ '/blogs/' | relative_url }}"{% if page.url contains '/blogs/' %} class="active"{% endif %}>
+      <span class="blog-nav-icon" aria-hidden="true">▤</span><span>Blogs</span>
+    </a>
+    <a href="{{ '/tags/' | relative_url }}"{% if page.url contains '/tags/' %} class="active" aria-current="page"{% endif %}>
+      <span class="blog-nav-icon" aria-hidden="true">#</span><span>Tags</span>
+    </a>
+  </nav>
+
   <nav class="blog-nav" aria-label="Blog sections">
-    <a class="blog-nav-home{% if page.url == '/blogs/' %} active{% endif %}" href="{{ '/blogs/' | relative_url }}">// blogs</a>
+    <p class="blog-nav-heading">Library</p>
     {%- for section in site.data.blog_sections -%}
       <div class="blog-nav-section" style="--section-depth: {{ section.depth }}">
         <h3 class="blog-nav-title">
@@ -26,4 +46,9 @@
       </div>
     {%- endfor -%}
   </nav>
+  <div class="blog-sidebar-footer">
+    {% if site.author.github %}
+    <a href="https://github.com/{{ site.author.github }}" rel="noopener" target="_blank" aria-label="GitHub profile">GitHub ↗</a>
+    {% endif %}
+  </div>
 </aside>
