@@ -7,7 +7,7 @@
   Example: blogs/cloud/aws.md -> section "cloud"; blogs/cyber/nmap.md -> "cyber".
 {%- endcomment -%}
 {%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" -%}
-{%- assign grouped = blog_docs | group_by_exp: "p", "p.dir | split: '/blogs/' | last | split: '/' | first" | sort: "name" -%}
+{%- assign grouped = blog_docs | group_by: "blog_section" | sort: "name" -%}
 <aside class="blog-sidebar" id="blog-sidebar">
   <nav class="blog-nav" aria-label="Blog sections">
     <a class="blog-nav-home{% if page.url == '/blogs/' %} active{% endif %}" href="{{ '/blogs/' | relative_url }}">// blogs</a>

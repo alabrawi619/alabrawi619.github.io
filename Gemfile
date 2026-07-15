@@ -8,4 +8,5 @@ gem "webrick"
 group :jekyll_plugins do
   gem "jekyll-seo-tag"
   gem "jekyll-feed"
+  gem "jekyll-optional-front-matter", "~> 0.3.2"
 end

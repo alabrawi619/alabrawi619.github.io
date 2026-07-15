@@ -3,11 +3,11 @@ layout: null
 sitemap: false
 ---
 {%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" -%}
-{%- assign sections = blog_docs | group_by_exp: "b", "b.dir | split: '/blogs/' | last | split: '/' | first" -%}
+{%- assign sections = blog_docs | group_by: "blog_section" -%}
 {
   "nodes": [
     {%- for blog in blog_docs -%}
-    {%- assign section = blog.dir | split: '/blogs/' | last | split: '/' | first -%}
+    {%- assign section = blog.blog_section -%}
     {
       "id": {{ blog.url | jsonify }},
       "label": {{ blog.title | default: blog.name | jsonify }},

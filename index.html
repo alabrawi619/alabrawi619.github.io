@@ -49,7 +49,7 @@ title: null
       {% for blog in recent_blogs %}
       <li class="post-card reveal">
         <a class="post-card-link" href="{{ blog.url | relative_url }}">
-          <span class="card-section">{{ blog.dir | split: '/blogs/' | last | split: '/' | first }}</span>
+          <span class="card-section">{{ blog.blog_section }}</span>
           <h2>{{ blog.title | default: blog.name | escape }}</h2>
           <p>{{ blog.description | default: blog.content | strip_html | truncate: 140 }}</p>
         </a>

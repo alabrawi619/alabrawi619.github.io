@@ -28,6 +28,10 @@ permalink: /:year/:month/:day/:title/
 plugins:
   - jekyll-seo-tag
   - jekyll-feed
+  - jekyll-optional-front-matter
+
+optional_front_matter:
+  remove_originals: true
 
 # --- Sass ---
 sass:
@@ -41,6 +45,10 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+  - scope:
+      path: "blogs"
+    values:
+      layout: "blog-doc"
 
 # --- Exclude from build ---
 exclude:

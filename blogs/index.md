@@ -6,7 +6,7 @@ blog_landing: true
 ---
 
 {%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" -%}
-{%- assign grouped = blog_docs | group_by_exp: "p", "p.dir | split: '/blogs/' | last | split: '/' | first" | sort: "name" -%}
+{%- assign grouped = blog_docs | group_by: "blog_section" | sort: "name" -%}
 
 <section class="graph-section" id="graph">
   <div class="graph-panel-head">
