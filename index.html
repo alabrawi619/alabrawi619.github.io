@@ -42,7 +42,7 @@ title: null
       <p class="section-sub">Fresh notes, experiments, and ideas.</p>
     </div>
 
-    {% assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" %}
+    {% assign blog_docs = site.pages | where: "blog_document", true | sort: "title" %}
     {% assign recent_blogs = blog_docs | slice: 0, 6 %}
     {% if recent_blogs.size > 0 %}
     <ul class="post-list post-grid">

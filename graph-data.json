@@ -2,7 +2,7 @@
 layout: null
 sitemap: false
 ---
-{%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" -%}
+{%- assign blog_docs = site.pages | where: "blog_document", true | sort: "title" -%}
 {%- assign blog_tags = "" | split: "" -%}
 {%- for blog in blog_docs -%}
   {%- if blog.tags -%}

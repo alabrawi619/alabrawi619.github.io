@@ -109,6 +109,24 @@
 .blog-nav {
   padding-top: $s-4;
 }
+.blog-library-list {
+  gap: $s-2;
+}
+.blog-library-card {
+  summary {
+    padding: $s-2 $s-3;
+    font-size: 0.8rem;
+  }
+  .category-row {
+    grid-template-columns: 18px minmax(0, 1fr);
+    padding: $s-2 $s-3;
+    font-size: 0.82rem;
+    &.active {
+      color: $neon-cyan;
+      background: rgba($neon-cyan, 0.08);
+    }
+  }
+}
 .blog-nav-heading {
   margin: 0 0 $s-2;
   padding-inline: $s-3;

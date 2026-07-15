@@ -9,14 +9,15 @@ permalink: /tags/
     <p class="page-subtitle">Browse posts by topic.</p>
   </header>
 
-  {% if site.tags.size > 0 %}
+  {% assign blog_tags = site.data.blog_tags %}
+  {% if blog_tags.size > 0 %}
   <div class="tag-cloud reveal">
-    {% for tag in site.tags %}
+    {% for tag in blog_tags %}
     <a class="chip chip-tag" href="#{{ tag[0] | slugify }}">#{{ tag[0] }} <span class="chip-count">{{ tag[1].size }}</span></a>
     {% endfor %}
   </div>
 
-  {% for tag in site.tags %}
+  {% for tag in blog_tags %}
   <section class="tag-group reveal" id="{{ tag[0] | slugify }}">
     <h2 class="tag-heading">#{{ tag[0] }}</h2>
     <ul class="post-list compact">

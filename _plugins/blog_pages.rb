@@ -33,6 +33,7 @@ module Jekyll
 
         page.data["blog_section"] ||= directory_parts.first
         page.data["blog_directory"] ||= directory_path
+        page.data["blog_document"] = true
         page.data["title"] ||= path_parts.last
         page.data["permalink"] ||= "/blogs/#{path_parts.map { |part| Utils.slugify(part) }.join("/")}/"
 
@@ -61,6 +62,14 @@ module Jekyll
         prefix = "#{section["path"]}/"
         section["descendants"] = site.data["blog_sections"].select { |candidate| candidate["path"].start_with?(prefix) }
       end
+      blog_tags = Hash.new { |tags, name| tags[name] = [] }
+      site.pages.select { |page| page.data["blog_document"] }.each do |page|
+        Array(page.data["tags"]).each do |tag|
+          tag_name = tag.to_s.strip
+          blog_tags[tag_name] << page unless tag_name.empty?
+        end
+      end
+      site.data["blog_tags"] = blog_tags.sort_by { |tag, _pages| tag.downcase }
       site.data["blog_sections"].each { |section| site.pages << BlogSectionPage.new(site, section) }
     end
   end

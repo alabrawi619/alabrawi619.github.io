@@ -26,25 +26,29 @@
 
   <nav class="blog-nav" aria-label="Blog sections">
     <p class="blog-nav-heading">Library</p>
+    <div class="category-list blog-library-list">
     {%- for section in site.data.blog_sections -%}
-      <div class="blog-nav-section" style="--section-depth: {{ section.depth }}">
-        <h3 class="blog-nav-title">
+      {%- unless section.parent -%}
+      <details class="category-card blog-library-card" open>
+        <summary>
+          <span class="category-folder" aria-hidden="true">▰</span>
           <a href="{{ section.url | relative_url }}"{% if page.blog_section_path == section.path or page.blog_directory == section.path %} class="active"{% endif %}>{{ section.name }}</a>
-        </h3>
-        {%- if section.pages.size > 0 -%}
-        <ul class="blog-nav-list">
-          {%- assign items = section.pages | sort: "title" -%}
+          <span class="category-meta">{{ section.total_count }} {% if section.total_count == 1 %}post{% else %}posts{% endif %}</span>
+          <span class="category-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="category-children">
+          {%- assign items = section.all_pages | sort: "title" -%}
           {%- for doc in items -%}
-          <li>
-            <a href="{{ doc.url | relative_url }}"{% if doc.url == page.url %} class="active" aria-current="page"{% endif %}>
-              {{ doc.title | default: doc.name }}
-            </a>
-          </li>
+          <a class="category-row{% if doc.url == page.url %} active{% endif %}" href="{{ doc.url | relative_url }}"{% if doc.url == page.url %} aria-current="page"{% endif %}>
+            <span class="category-row-icon" aria-hidden="true">□</span>
+            <span class="category-row-name">{{ doc.title | default: doc.name }}</span>
+          </a>
           {%- endfor -%}
-        </ul>
-        {%- endif -%}
-      </div>
+        </div>
+      </details>
+      {%- endunless -%}
     {%- endfor -%}
+    </div>
   </nav>
   <div class="blog-sidebar-footer">
     {% if site.author.github %}
