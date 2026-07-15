@@ -8,7 +8,7 @@ module Jekyll
 
       data["layout"] = "blog-section"
       data["title"] = section["name"]
-      data["description"] = "#{section["count"]} #{section["count"] == 1 ? "blog" : "blogs"} in this section."
+      data["description"] = "#{section["count"]} #{section["count"] == 1 ? "blog" : "blogs"} in this section and its subsections."
       data["blog_section_path"] = section["path"]
       data["blog_pages"] = section["all_pages"].sort_by { |page| page.data["title"].downcase }
       data["permalink"] = section["url"]
@@ -29,9 +29,10 @@ module Jekyll
         relative_path = page.path.delete_prefix("blogs/").sub(/\.[^.]+\z/, "")
         path_parts = relative_path.split("/")
         directory_parts = path_parts[0...-1]
+        directory_path = directory_parts.join("/")
 
         page.data["blog_section"] ||= directory_parts.first
-        page.data["blog_directory"] ||= directory_parts.join("/")
+        page.data["blog_directory"] ||= directory_path
         page.data["title"] ||= path_parts.last
         page.data["permalink"] ||= "/blogs/#{path_parts.map { |part| Utils.slugify(part) }.join("/")}/"
 
@@ -52,7 +53,7 @@ module Jekyll
           sections[path]["all_pages"] << page
         end
 
-        sections[directory_parts.join("/")]["pages"] << page unless directory_parts.empty?
+        sections[directory_path]["pages"] << page unless directory_parts.empty?
       end
 
       site.data["blog_sections"] = sections.values.sort_by { |section| section["path"].downcase }
