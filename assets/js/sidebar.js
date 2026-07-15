@@ -16,7 +16,8 @@
     function isCollapsed() { return layout.classList.contains("sidebar-collapsed"); }
 
     // The knowledge graph sizes itself to its container, so nudge it to
-    // re-measure whenever the content width changes.
+    // re-measure whenever the content width changes. The second dispatch fires
+    // after the sidebar's 0.3s ($t-mid) slide/layout has settled.
     function notifyResize() {
       window.dispatchEvent(new Event("resize"));
       window.setTimeout(function () { window.dispatchEvent(new Event("resize")); }, 340);
