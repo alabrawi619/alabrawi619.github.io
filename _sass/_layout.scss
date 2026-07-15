@@ -247,9 +247,16 @@
   text-align: center;
 }
 
-// Post-card grid — fills the available width with real content.
+// Post-card grid — centers partial rows of up to four cards.
 .post-grid {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .post-card {
+    flex: 1 1 280px;
+    max-width: 370px;
+  }
 }
 
 // Outlined "ghost" button used for secondary calls to action.
