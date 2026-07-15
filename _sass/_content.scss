@@ -19,6 +19,12 @@
   padding: $s-5 clamp($s-3, 4vw, $s-6);
 }
 
+// The blogs landing page drops the fixed sidebar (its Index/Categories list
+// already provides navigation), so the content column spans the full width.
+.blog-landing-layout {
+  padding-left: 0;
+}
+
 .blog-sidebar {
   position: fixed;
   top: 64px;
