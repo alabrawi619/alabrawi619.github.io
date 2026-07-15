@@ -37,7 +37,7 @@ blog_landing: true
     {%- for group in grouped -%}
     <article class="section-card">
       <div class="section-card-head">
-        <span class="section-number">0{{ forloop.index }}</span>
+        <span class="section-number">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
         <span class="section-count">{{ group.items.size }} {% if group.items.size == 1 %}entry{% else %}entries{% endif %}</span>
       </div>
       <h3>{{ group.name }}</h3>

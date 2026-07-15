@@ -158,12 +158,12 @@
 
     function setLayoutTargets(data, dim) {
       var sections = data.nodes.filter(function (d) { return d.type === "section"; });
-      var sectionIndex = {};
+      var sectionsById = {};
       var ring = Math.min(dim.w, dim.h) * (sections.length > 1 ? 0.24 : 0);
 
       sections.forEach(function (section, index) {
         var angle = -Math.PI / 2 + (Math.PI * 2 * index / Math.max(sections.length, 1));
-        sectionIndex[section.id] = index;
+        sectionsById[section.id] = section;
         section.targetX = dim.w / 2 + Math.cos(angle) * ring;
         section.targetY = dim.h / 2 + Math.sin(angle) * ring;
         section.x = section.x == null ? section.targetX : section.x;
@@ -176,7 +176,7 @@
       });
 
       Object.keys(blogsBySection).forEach(function (sectionName) {
-        var section = sections[sectionIndex["section::" + sectionName]];
+        var section = sectionsById["section::" + sectionName];
         var blogs = blogsBySection[sectionName];
         if (!section) return;
         blogs.forEach(function (blog, index) {
