@@ -1,21 +1,19 @@
 {%- comment -%}
   Folder-driven blogs navigation.
-  Any Markdown/HTML file placed under `blogs/<section>/<name>.md` is grouped
-  under its section (the sub-directory name), so creating a new folder under
-  blogs/ automatically produces a new section. Files placed directly in blogs/
-  (e.g. index.md) are excluded because their page.dir is exactly "/blogs/".
-  Example: blogs/cloud/aws.md -> section "cloud"; blogs/cyber/nmap.md -> "cyber".
+  Every directory below `blogs/` becomes a section. Nested directories become
+  subsections, even when the parent directory contains no pages of its own.
 {%- endcomment -%}
-{%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" -%}
-{%- assign grouped = blog_docs | group_by: "blog_section" | sort: "name" -%}
 <aside class="blog-sidebar" id="blog-sidebar">
   <nav class="blog-nav" aria-label="Blog sections">
     <a class="blog-nav-home{% if page.url == '/blogs/' %} active{% endif %}" href="{{ '/blogs/' | relative_url }}">// blogs</a>
-    {%- for group in grouped -%}
-      <div class="blog-nav-section">
-        <h3 class="blog-nav-title">{{ group.name }}</h3>
+    {%- for section in site.data.blog_sections -%}
+      <div class="blog-nav-section" style="--section-depth: {{ section.depth }}">
+        <h3 class="blog-nav-title">
+          <a href="{{ section.url | relative_url }}"{% if page.blog_section_path == section.path or page.blog_directory == section.path %} class="active"{% endif %}>{{ section.name }}</a>
+        </h3>
+        {%- if section.pages.size > 0 -%}
         <ul class="blog-nav-list">
-          {%- assign items = group.items | sort: "title" -%}
+          {%- assign items = section.pages | sort: "title" -%}
           {%- for doc in items -%}
           <li>
             <a href="{{ doc.url | relative_url }}"{% if doc.url == page.url %} class="active" aria-current="page"{% endif %}>
@@ -24,6 +22,7 @@
           </li>
           {%- endfor -%}
         </ul>
+        {%- endif -%}
       </div>
     {%- endfor -%}
   </nav>

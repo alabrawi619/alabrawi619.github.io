@@ -1,0 +1,18 @@
+---
+layout: blog-doc
+---
+<section class="section-grid" aria-label="{{ page.title }} blogs">
+  {%- for doc in page.blog_pages -%}
+  <article class="section-card">
+    <div class="section-card-head">
+      <span class="section-number">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+      <span class="section-count">Blog</span>
+    </div>
+    <h3>{{ doc.title | default: doc.name }}</h3>
+    <a href="{{ doc.url | relative_url }}" aria-label="Read {{ doc.title | default: doc.name }}">
+      <span>Read blog</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </article>
+  {%- endfor -%}
+</section>

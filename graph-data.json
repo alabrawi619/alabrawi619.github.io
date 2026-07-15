@@ -3,34 +3,37 @@ layout: null
 sitemap: false
 ---
 {%- assign blog_docs = site.pages | where_exp: "p", "p.dir contains '/blogs/'" | where_exp: "p", "p.dir != '/blogs/'" | sort: "title" -%}
-{%- assign sections = blog_docs | group_by: "blog_section" -%}
 {
   "nodes": [
     {%- for blog in blog_docs -%}
-    {%- assign section = blog.blog_section -%}
     {
       "id": {{ blog.url | jsonify }},
       "label": {{ blog.title | default: blog.name | jsonify }},
       "type": "blog",
-      "section": {{ section | jsonify }},
+      "section": {{ blog.blog_directory | jsonify }},
       "url": {{ blog.url | relative_url | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
-    {%- if blog_docs.size > 0 and sections.size > 0 -%},{%- endif -%}
-    {%- for section in sections -%}
+    {%- if blog_docs.size > 0 and site.data.blog_sections.size > 0 -%},{%- endif -%}
+    {%- for section in site.data.blog_sections -%}
     {
-      "id": {{ section.name | prepend: "section::" | jsonify }},
+      "id": {{ section.path | prepend: "section::" | jsonify }},
       "label": {{ section.name | jsonify }},
       "type": "section",
-      "count": {{ section.items.size }}
+      "count": {{ section.total_count }}
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ],
   "links": [
     {%- assign first = true -%}
-    {%- for section in sections -%}
-      {%- assign sectionid = section.name | prepend: "section::" -%}
-      {%- for blog in section.items -%}
+    {%- for section in site.data.blog_sections -%}
+      {%- assign sectionid = section.path | prepend: "section::" -%}
+      {%- if section.parent -%}
+        {%- unless first -%},{%- endunless -%}
+        { "source": {{ sectionid | jsonify }}, "target": {{ section.parent | prepend: "section::" | jsonify }} }
+        {%- assign first = false -%}
+      {%- endif -%}
+      {%- for blog in section.pages -%}
         {%- unless first -%},{%- endunless -%}
         { "source": {{ blog.url | jsonify }}, "target": {{ sectionid | jsonify }} }
         {%- assign first = false -%}

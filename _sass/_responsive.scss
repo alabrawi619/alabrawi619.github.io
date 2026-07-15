@@ -18,7 +18,7 @@
   // slides in when opened, instead of taking a layout column.
   .blog-doc-layout,
   .blog-doc-layout.sidebar-collapsed { grid-template-columns: 1fr; }
-  .blog-doc-layout.blog-landing-layout { padding-block: $s-4; }
+  .blog-doc-main { padding: $s-4 $s-3; }
   .blog-sidebar {
     position: fixed;
     top: 56px;
