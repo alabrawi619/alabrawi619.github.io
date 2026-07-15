@@ -24,16 +24,6 @@ sitemap: false
     }
     {%- assign first = false -%}
     {%- endfor -%}
-    {%- for section in site.data.blog_sections -%}
-    {%- unless first -%},{%- endunless -%}
-    {
-      "id": {{ section.path | prepend: "section::" | jsonify }},
-      "label": {{ section.name | jsonify }},
-      "type": "section",
-      "count": {{ section.total_count }}
-    }
-    {%- assign first = false -%}
-    {%- endfor -%}
     {%- for tag in blog_tags -%}
     {%- unless first -%},{%- endunless -%}
     {%- assign tag_count = 0 -%}
@@ -53,19 +43,6 @@ sitemap: false
   ],
   "links": [
     {%- assign first = true -%}
-    {%- for section in site.data.blog_sections -%}
-      {%- assign sectionid = section.path | prepend: "section::" -%}
-      {%- if section.parent -%}
-        {%- unless first -%},{%- endunless -%}
-        { "source": {{ sectionid | jsonify }}, "target": {{ section.parent | prepend: "section::" | jsonify }} }
-        {%- assign first = false -%}
-      {%- endif -%}
-      {%- for blog in section.pages -%}
-        {%- unless first -%},{%- endunless -%}
-        { "source": {{ blog.url | jsonify }}, "target": {{ sectionid | jsonify }} }
-        {%- assign first = false -%}
-      {%- endfor -%}
-    {%- endfor -%}
     {%- for blog in blog_docs -%}
       {%- for tag in blog.tags -%}
         {%- unless first -%},{%- endunless -%}

@@ -14,37 +14,15 @@
   .post-nav { grid-template-columns: 1fr; }
   .nav-next { text-align: left !important; }
 
-  // On small screens the sidebar becomes an off-canvas overlay drawer that
-  // slides in when opened, instead of taking a layout column.
-  .blog-doc-layout,
-  .blog-doc-layout.sidebar-collapsed { grid-template-columns: 1fr; }
   .blog-doc-main { padding: $s-4 $s-3; }
+  .blog-doc-layout {
+    --sidebar-w: min(240px, 48vw);
+    min-height: calc(100vh - 56px);
+  }
   .blog-sidebar {
-    position: fixed;
     top: 56px;
-    left: 0;
-    bottom: 0;
-    width: min(280px, 82vw);
-    height: calc(100vh - 56px);
-    max-height: none;
-    z-index: 95;
-    border-radius: 0;
-    border-width: 0 1px 0 0;
-    transform: translateX(-100%);
-    transition: transform $t-mid;
+    padding-inline: $s-2;
   }
-  // Keep the drawer in the DOM even when collapsed so it can slide.
-  .blog-doc-layout.sidebar-collapsed .blog-sidebar { display: block; }
-  .blog-doc-layout:not(.sidebar-collapsed) .blog-sidebar { transform: translateX(0); }
-  .blog-doc-layout:not(.sidebar-collapsed) .sidebar-backdrop {
-    display: block;
-    position: fixed;
-    inset: 56px 0 0 0;
-    z-index: 90;
-    background: rgba($bg-deep, 0.6);
-    backdrop-filter: blur(2px);
-  }
-  .sidebar-backdrop[hidden] { display: none; }
 
   .blog-landing {
     > .page-header { margin-bottom: $s-5; }

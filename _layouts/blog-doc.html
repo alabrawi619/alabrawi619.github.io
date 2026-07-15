@@ -3,17 +3,7 @@ layout: default
 ---
 <div class="blog-doc-layout{% if page.blog_landing %} blog-landing-layout{% endif %}" data-blog-doc>
   {% include blog-sidebar.html %}
-  <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
   <div class="blog-doc-main">
-    <div class="blog-doc-bar">
-      <button type="button" class="sidebar-toggle" data-sidebar-toggle aria-controls="blog-sidebar" aria-expanded="true" aria-label="Toggle sidebar">
-        <span class="sidebar-toggle-box">
-          <span class="sidebar-toggle-bar"></span>
-          <span class="sidebar-toggle-bar"></span>
-          <span class="sidebar-toggle-bar"></span>
-        </span>
-      </button>
-    </div>
     <article class="blog-doc-content{% if page.blog_landing %} blog-landing{% endif %} reveal">
       <header class="page-header">
         {% if page.blog_landing %}<span class="page-kicker">// knowledge base</span>{% endif %}
@@ -26,4 +16,3 @@ layout: default
     </article>
   </div>
 </div>
-<script src="{{ '/assets/js/sidebar.js' | relative_url }}" defer></script>

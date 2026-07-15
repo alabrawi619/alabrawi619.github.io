@@ -106,8 +106,6 @@
 }
 .node-blog circle.graph-node-core { color: $neon-cyan; filter: drop-shadow(0 0 6px rgba($neon-cyan, 0.55)); }
 .node-blog circle.graph-node-halo { color: $neon-cyan; }
-.node-section circle.graph-node-core { color: $neon-magenta; filter: drop-shadow(0 0 6px rgba($neon-magenta, 0.55)); }
-.node-section circle.graph-node-halo { color: $neon-magenta; }
 .node-tag circle.graph-node-core { color: $neon-green; filter: drop-shadow(0 0 6px rgba($neon-green, 0.55)); }
 .node-tag circle.graph-node-halo { color: $neon-green; }
 
@@ -153,7 +151,6 @@
 .legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .legend-blog { background: $neon-cyan; box-shadow: 0 0 8px $neon-cyan; }
-.legend-section { background: $neon-magenta; box-shadow: 0 0 8px $neon-magenta; }
 .legend-tag { background: $neon-green; box-shadow: 0 0 8px $neon-green; }
 
 .graph-empty {

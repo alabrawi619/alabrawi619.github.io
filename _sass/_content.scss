@@ -10,75 +10,30 @@
 .blog-doc-layout {
   --sidebar-w: 280px;
   --content-w: 860px;
-  display: grid;
-  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
-  gap: 0;
-  align-items: start;
+  min-height: calc(100vh - 64px);
+  padding-left: var(--sidebar-w);
   width: 100%;
-}
-// Collapsed state — the sidebar column disappears and the content fills 100%.
-.blog-doc-layout.sidebar-collapsed {
-  grid-template-columns: minmax(0, 1fr);
-  .blog-sidebar { display: none; }
 }
 .blog-doc-main {
   min-width: 0;
   padding: $s-5 clamp($s-3, 4vw, $s-6);
 }
-.blog-doc-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: $s-3;
-}
-// Backdrop only used on small screens when the sidebar is an overlay drawer.
-.sidebar-backdrop { display: none; }
-
-// --- Sidebar toggle (hamburger) ---
-.sidebar-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid $line-strong;
-  border-radius: 10px;
-  background: $bg-panel;
-  color: $text-muted;
-  cursor: pointer;
-  transition: color $t-fast, border-color $t-fast, box-shadow $t-mid;
-  &:hover, &:focus-visible {
-    color: $neon-cyan;
-    border-color: rgba($neon-cyan, 0.6);
-    box-shadow: 0 0 0 1px rgba($neon-cyan, 0.3), 0 10px 30px -14px rgba($neon-cyan, 0.6);
-  }
-}
-.sidebar-toggle-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 18px;
-  height: 13px;
-}
-.sidebar-toggle-bar {
-  display: block;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-}
 
 .blog-sidebar {
-  position: sticky;
+  position: fixed;
   top: 64px;
-  align-self: start;
+  bottom: 0;
+  left: 0;
+  z-index: 80;
   display: flex;
   flex-direction: column;
+  width: var(--sidebar-w);
   border: 1px solid $line;
   border-width: 0 1px 0 0;
   background:
     radial-gradient(260px 180px at 50% 0, rgba($neon-purple, 0.12), transparent 72%),
     $bg-panel;
   padding: $s-5 $s-3 $s-3;
-  height: calc(100vh - 64px);
   overflow-y: auto;
 }
 .blog-sidebar-profile {

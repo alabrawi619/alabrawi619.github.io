@@ -35,7 +35,6 @@
 
     // Neon palette (kept in sync with SCSS variables).
     var COLOR_BLOG = "#00e5ff";
-    var COLOR_SECTION = "#ff2bd6";
     var COLOR_TAG = "#39ff9e";
 
     function render(data) {
@@ -147,12 +146,10 @@
 
     function color(d) {
       if (d.type === "blog") return COLOR_BLOG;
-      if (d.type === "tag") return COLOR_TAG;
-      return COLOR_SECTION;
+      return COLOR_TAG;
     }
 
     function radius(d) {
-      if (d.type === "section") return 8 + Math.min(d.count || 1, 6) * 1.6;
       if (d.type === "tag") return 5 + Math.min(d.count || 1, 6);
       return 13;
     }
@@ -165,8 +162,6 @@
         html = "<strong>" + escapeHtml(d.label) + "</strong><span>" + escapeHtml(d.section || "") + "</span>";
       } else if (d.type === "tag") {
         html = "<strong>#" + escapeHtml(d.label) + "</strong><span>" + count + " blog" + (count === 1 ? "" : "s") + "</span>";
-      } else {
-        html = "<strong>" + escapeHtml(d.label) + "</strong><span>" + count + " blog" + (count === 1 ? "" : "s") + "</span>";
       }
       tooltip.innerHTML = html;
       tooltip.hidden = false;

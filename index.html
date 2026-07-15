@@ -67,16 +67,15 @@ title: null
 <section class="graph-section" id="graph">
   <div class="graph-head reveal">
     <h2 class="section-title">Knowledge Graph</h2>
-    <p class="section-sub">Blogs, sections, and tags that connect them. Drag nodes, hover for details.</p>
+    <p class="section-sub">Blogs and tags that connect them. Drag nodes, hover for details.</p>
   </div>
 
   <div class="graph-shell reveal">
-    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of blogs, sections, and tags">
+    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of blogs and tags">
       <p class="graph-empty" hidden>No blogs yet — the graph will grow as you publish.</p>
     </div>
     <div class="graph-legend">
       <span class="legend-item"><span class="legend-dot legend-blog"></span>Blog</span>
-      <span class="legend-item"><span class="legend-dot legend-section"></span>Section</span>
       <span class="legend-item"><span class="legend-dot legend-tag"></span>Tag</span>
     </div>
     <div id="graph-tooltip" class="graph-tooltip" role="tooltip" hidden></div>

@@ -13,12 +13,11 @@ blog_landing: true
     </div>
     <div class="graph-legend" aria-label="Graph legend">
       <span class="legend-item"><span class="legend-dot legend-blog"></span>Blog</span>
-      <span class="legend-item"><span class="legend-dot legend-section"></span>Section</span>
       <span class="legend-item"><span class="legend-dot legend-tag"></span>Tag</span>
     </div>
   </div>
   <div class="graph-shell reveal">
-    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of blogs, sections, and tags">
+    <div id="knowledge-graph" data-src="{{ '/graph-data.json' | relative_url }}" role="img" aria-label="Force-directed graph of blogs and tags">
       <p class="graph-empty" hidden>No blogs yet — the graph will grow as you publish.</p>
     </div>
     <div id="graph-tooltip" class="graph-tooltip" role="tooltip" hidden></div>
