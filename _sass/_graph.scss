@@ -22,9 +22,13 @@
 
 .graph-shell {
   position: relative;
-  width: min(720px, 94vw);
+  width: min(1600px, 94vw);
   margin-inline: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: auto;
+  // Fill most of the screen: nearly full width and a tall, viewport-driven
+  // height. The 180px offset roughly reserves room for the sticky header plus
+  // the section heading/legend so the graph doesn't overflow the viewport.
+  height: clamp(520px, calc(100vh - 180px), 1100px);
   border: 1px solid $line;
   border-radius: $radius;
   background:
