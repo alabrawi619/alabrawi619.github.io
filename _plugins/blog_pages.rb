@@ -10,7 +10,7 @@ module Jekyll
       data["title"] = section["name"]
       data["description"] = "#{section["count"]} #{section["count"] == 1 ? "blog" : "blogs"} in this section and its subsections."
       data["blog_section_path"] = section["path"]
-      data["blog_pages"] = section["all_pages"].sort_by { |page| page.data["title"].downcase }
+      data["blog_pages"] = section["all_pages"].sort_by { |page| page.data["title"].to_s.downcase }
       data["permalink"] = section["url"]
     end
   end
