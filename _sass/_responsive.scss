@@ -18,6 +18,7 @@
   // slides in when opened, instead of taking a layout column.
   .blog-doc-layout,
   .blog-doc-layout.sidebar-collapsed { grid-template-columns: 1fr; }
+  .blog-doc-layout.blog-landing-layout { padding-block: $s-4; }
   .blog-sidebar {
     position: fixed;
     top: 56px;
@@ -44,6 +45,17 @@
     backdrop-filter: blur(2px);
   }
   .sidebar-backdrop[hidden] { display: none; }
+
+  .blog-landing {
+    > .page-header { margin-bottom: $s-5; }
+    .graph-panel-head {
+      align-items: flex-start;
+      padding: $s-3;
+    }
+    .graph-shell { height: clamp(380px, 75vh, 520px); }
+  }
+  .graph-hint { padding-inline: $s-3; }
+  .blog-directory { padding-top: $s-6; }
 }
 
 @media (max-width: $bp-sm) {
@@ -52,4 +64,8 @@
   .site-nav a[href*="github.com"] { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: $s-1; }
   .graph-legend { font-size: 0.7rem; }
+  .blog-landing .graph-panel-head {
+    flex-direction: column;
+    .graph-legend { width: 100%; justify-content: center; }
+  }
 }
