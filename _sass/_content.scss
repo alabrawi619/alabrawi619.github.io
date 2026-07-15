@@ -109,10 +109,10 @@
 .blog-nav {
   padding-top: $s-4;
 }
-.blog-library-list {
+.category-list.blog-library-list {
   gap: $s-2;
 }
-.blog-library-card {
+.category-card.blog-library-card {
   summary {
     padding: $s-2 $s-3;
     font-size: 0.8rem;

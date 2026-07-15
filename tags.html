@@ -22,7 +22,7 @@ permalink: /tags/
     <h2 class="tag-heading">#{{ tag[0] }}</h2>
     <ul class="post-list compact">
       {% for post in tag[1] %}
-      <li><a href="{{ post.url | relative_url }}"><time>{{ post.date | date: "%Y-%m-%d" }}</time> {{ post.title | escape }}</a></li>
+      <li><a href="{{ post.url | relative_url }}">{% if post.date %}<time>{{ post.date | date: "%Y-%m-%d" }}</time>{% endif %} {{ post.title | escape }}</a></li>
       {% endfor %}
     </ul>
   </section>
