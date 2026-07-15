@@ -57,6 +57,10 @@ module Jekyll
       end
 
       site.data["blog_sections"] = sections.values.sort_by { |section| section["path"].downcase }
+      site.data["blog_sections"].each do |section|
+        prefix = "#{section["path"]}/"
+        section["descendants"] = site.data["blog_sections"].select { |candidate| candidate["path"].start_with?(prefix) }
+      end
       site.data["blog_sections"].each { |section| site.pages << BlogSectionPage.new(site, section) }
     end
   end
