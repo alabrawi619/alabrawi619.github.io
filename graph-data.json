@@ -20,7 +20,7 @@ sitemap: false
       "id": {{ section.path | prepend: "section::" | jsonify }},
       "label": {{ section.name | jsonify }},
       "type": "section",
-      "count": {{ section.count }}
+      "count": {{ section.total_count }}
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ],

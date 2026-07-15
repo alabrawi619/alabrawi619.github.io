@@ -8,7 +8,7 @@ module Jekyll
 
       data["layout"] = "blog-section"
       data["title"] = section["name"]
-      data["description"] = "#{section["count"]} #{section["count"] == 1 ? "blog" : "blogs"} in this section and its subsections."
+      data["description"] = "#{section["total_count"]} #{section["total_count"] == 1 ? "blog" : "blogs"} across this section and its subsections."
       data["blog_section_path"] = section["path"]
       data["blog_pages"] = section["all_pages"].sort_by { |page| page.data["title"].to_s.downcase }
       data["permalink"] = section["url"]
@@ -44,12 +44,12 @@ module Jekyll
             "path" => path,
             "depth" => index,
             "parent" => index.zero? ? nil : parts[0...-1].join("/"),
-            "count" => 0,
+            "total_count" => 0,
             "pages" => [],
             "all_pages" => [],
             "url" => "/blogs/#{parts.map { |part| Utils.slugify(part) }.join("/")}/"
           }
-          sections[path]["count"] += 1
+          sections[path]["total_count"] += 1
           sections[path]["all_pages"] << page
         end
 

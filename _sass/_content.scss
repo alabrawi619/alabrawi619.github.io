@@ -12,6 +12,7 @@
 // spans the whole viewport width.
 .blog-doc-layout {
   --sidebar-w: 260px;
+  --content-w: 860px;
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   gap: 0;
@@ -127,7 +128,7 @@
   }
 }
 .blog-doc-content {
-  width: min(860px, 100%);
+  width: min(var(--content-w), 100%);
   min-width: 0;
   margin-inline: auto;
 }

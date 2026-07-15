@@ -35,7 +35,7 @@ blog_landing: true
     <article class="section-card" style="--section-depth: {{ section.depth }}">
       <div class="section-card-head">
         <span class="section-number">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
-        <span class="section-count">{{ section.count }} {% if section.count == 1 %}entry{% else %}entries{% endif %}</span>
+        <span class="section-count">{{ section.total_count }} {% if section.total_count == 1 %}entry{% else %}entries{% endif %}</span>
       </div>
       <h3>{% if section.depth > 0 %}<span class="subsection-marker">↳</span>{% endif %}{{ section.name }}</h3>
       {%- if section.pages.size > 0 %}
