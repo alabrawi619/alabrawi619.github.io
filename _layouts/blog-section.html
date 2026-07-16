@@ -8,11 +8,12 @@ layout: blog-doc
       <span class="section-number">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
       <span class="section-count">Blog</span>
     </div>
-    <h3>{{ doc.title | default: doc.name }}</h3>
-    <a href="{{ doc.url | relative_url }}" aria-label="Read {{ doc.title | default: doc.name }}">
-      <span>Read blog</span>
-      <span aria-hidden="true">↗</span>
-    </a>
+    <h3>
+      <a href="{{ doc.url | relative_url }}">
+        <span>{{ doc.title | default: doc.name }}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </h3>
   </article>
   {%- endfor -%}
 </section>
